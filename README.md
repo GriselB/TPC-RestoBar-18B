@@ -5,4 +5,7 @@
 #### **Integrantes**
 
 * #### Marian Grisel Morales Bonadies - Legajo: 32687
+* #### Aureliano Michilini - Legajo: 41043
+
+#### 
 
