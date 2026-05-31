@@ -6,9 +6,9 @@
 
 # 
 
-# \* Marian Grisel Morales Bonadies - Legajo: 32687
+# \- Marian Grisel Morales Bonadies - Legajo: 32687
 
-# \* Aureliano Michilini - Legajo: 41043
+# \- Aureliano Michilini - Legajo: 41043
 
 # 
 
@@ -56,19 +56,19 @@
 
 # 
 
-# \* Gestión de usuarios.
+# \- Gestión de usuarios.
 
-# \* Administración de mesas.
+# \- Administración de mesas.
 
-# \* Asignación de mesas a meseros.
+# \- Asignación de mesas a meseros.
 
-# \* Administración de insumos.
+# \- Administración de insumos.
 
-# \* Apertura y cierre de pedidos.
+# \- Apertura y cierre de pedidos.
 
-# \* Control de stock.
+# \- Control de stock.
 
-# \* Consultas y reportes operativos.
+# \- Consultas y reportes operativos.
 
 # 
 
@@ -76,7 +76,37 @@
 
 # 
 
-# \# 👥 4. Roles del Sistema
+# \# 🗂️ 4. Entidades Principales
+
+# 
+
+# El sistema estará compuesto por las siguientes entidades principales:
+
+# 
+
+# \- Usuario
+
+# \- Mesa
+
+# \- Pedido
+
+# \- DetallePedido
+
+# \- Insumo
+
+# \- AsignacionMesa
+
+# 
+
+# > Nota: Durante la etapa de diseño podrán surgir entidades complementarias necesarias para soportar la lógica de negocio.
+
+# 
+
+# \---
+
+# 
+
+# \# 👥 5. Roles del Sistema
 
 # 
 
@@ -92,21 +122,21 @@
 
 # 
 
-# \* Administrar usuarios.
+# \- Administrar usuarios.
 
-# \* Administrar meseros.
+# \- Administrar meseros.
 
-# \* Administrar mesas.
+# \- Administrar mesas.
 
-# \* Administrar insumos.
+# \- Administrar insumos.
 
-# \* Asignar y reasignar mesas.
+# \- Asignar y reasignar mesas.
 
-# \* Consultar pedidos.
+# \- Consultar pedidos.
 
-# \* Visualizar reportes.
+# \- Visualizar reportes.
 
-# \* Supervisar la operación completa del restaurante.
+# \- Supervisar la operación completa del restaurante.
 
 # 
 
@@ -126,15 +156,19 @@
 
 # 
 
-# \* Consultar sus mesas asignadas.
+# \- Consultar sus mesas asignadas.
 
-# \* Abrir pedidos.
+# \- Abrir pedidos.
 
-# \* Agregar productos a los pedidos.
+# \- Agregar productos a los pedidos.
 
-# \* Cerrar pedidos.
+# \- Modificar pedidos.
 
-# \* Consultar la información relacionada con sus mesas.
+# \- Cerrar pedidos.
+
+# \- Consultar la información relacionada con sus mesas.
+
+# \- Confirmar solicitudes realizadas por los clientes.
 
 # 
 
@@ -142,7 +176,7 @@
 
 # 
 
-# \# 📦 5. Módulos Funcionales
+# \# 📦 6. Módulos Funcionales
 
 # 
 
@@ -158,13 +192,13 @@
 
 # 
 
-# \* Inicio de sesión.
+# \- Inicio de sesión.
 
-# \* Gestión de perfiles.
+# \- Gestión de perfiles.
 
-# \* Administración de permisos.
+# \- Administración de permisos.
 
-# \* Control de acceso según rol.
+# \- Control de acceso según rol.
 
 # 
 
@@ -184,13 +218,13 @@
 
 # 
 
-# \* Alta de mesas.
+# \- Alta de mesas.
 
-# \* Modificación de información.
+# \- Modificación de información.
 
-# \* Consulta de disponibilidad.
+# \- Consulta de disponibilidad.
 
-# \* Asignación de responsable.
+# \- Asignación de responsable.
 
 # 
 
@@ -210,13 +244,13 @@
 
 # 
 
-# \* Alta de meseros.
+# \- Alta de meseros.
 
-# \* Modificación de datos.
+# \- Modificación de datos.
 
-# \* Consulta de asignaciones.
+# \- Consulta de asignaciones.
 
-# \* Seguimiento de actividad.
+# \- Seguimiento de actividad.
 
 # 
 
@@ -236,9 +270,9 @@
 
 # 
 
-# \* Platos.
+# \- Platos.
 
-# \* Bebidas.
+# \- Bebidas.
 
 # 
 
@@ -246,16 +280,17 @@
 
 # 
 
-# \* Nombre.
+# \- Nombre.
 
-# \* Descripción.
+# \- Descripción.
 
-# \* Precio.
+# \- Precio.
 
-\* Stock disponible.
-\* Imagen - A VALIDAR
+# \- Stock disponible.
 
-===
+# \- Imagen asociada (\*\*A VALIDAR\*\*).
+
+# 
 
 # \---
 
@@ -273,15 +308,29 @@
 
 # 
 
-# \* Apertura de pedidos.
+# \- Apertura de pedidos.
 
-# \* Incorporación de productos.
+# \- Incorporación de productos.
 
-# \* Actualización de cantidades.
+# \- Actualización de cantidades.
 
-# \* Cierre de pedidos.
+# \- Modificación de pedidos.
 
-# \* Asociación automática con la mesa y el mesero responsable.
+# \- Cierre de pedidos.
+
+# \- Asociación automática con la mesa y el mesero responsable.
+
+# 
+
+# \### Regla de Negocio
+
+# 
+
+# Una misma mesa podrá registrar múltiples pedidos durante una misma jornada.
+
+# 
+
+# Cada pedido conservará su historial de forma independiente.
 
 # 
 
@@ -301,11 +350,11 @@
 
 # 
 
-# \* Asignación diaria.
+# \- Asignación diaria.
 
-# \* Reasignación de mesas.
+# \- Reasignación de mesas.
 
-# \* Consulta de mesas asignadas.
+# \- Consulta de mesas asignadas.
 
 # 
 
@@ -313,7 +362,7 @@
 
 # 
 
-# \# 📋 6. Gestión Operativa
+# \# 📋 7. Gestión Operativa
 
 # 
 
@@ -341,7 +390,7 @@
 
 # 
 
-# \# 📊 7. Reportes del Sistema
+# \# 📊 8. Reportes del Sistema
 
 # 
 
@@ -353,39 +402,39 @@
 
 # 
 
-# | Reporte                         | Descripción                                                               |
+# | Reporte | Descripción |
 
-# | ------------------------------- | ------------------------------------------------------------------------- |
+# |----------|-------------|
 
-# | Pedidos abiertos                | Visualización de todos los pedidos que se encuentran actualmente en curso | 
+# | Pedidos abiertos | Visualización de todos los pedidos que se encuentran actualmente en curso |
 
-# | Pedidos cerrados                | Consulta de pedidos finalizados en una fecha determinada                  | 
+# | Pedidos cerrados | Consulta de pedidos finalizados en una fecha determinada |
 
-# | Historial de pedidos por mesa   | Seguimiento de todos los pedidos realizados por una mesa                  |
+# | Historial de pedidos por mesa | Seguimiento de todos los pedidos realizados por una mesa |
 
-# | Pedidos por mesero              | Consulta de pedidos gestionados por un mesero específico                  |
+# | Pedidos por mesero | Consulta de pedidos gestionados por un mesero específico |
 
-# | Detalle de pedido               | Visualización completa de los productos asociados a un pedido             |
+# | Detalle de pedido | Visualización completa de los productos asociados a un pedido |
 
-# | Consumo de insumos por fecha    | Consulta de productos consumidos durante una jornada                      |
+# | Consumo de insumos por fecha | Consulta de productos consumidos durante una jornada |
 
-# | Stock actual de insumos         | Estado actualizado del inventario disponible                              |
+# | Stock actual de insumos | Estado actualizado del inventario disponible |
 
-# | Insumos con stock crítico       | Identificación de productos próximos a agotarse                           |
+# | Insumos con stock crítico | Identificación de productos próximos a agotarse |
 
-# | Mesas asignadas por mesero      | Distribución actual de mesas entre los distintos meseros                  |
+# | Mesas asignadas por mesero | Distribución actual de mesas entre los distintos meseros |
 
-# | Mesas sin asignar               | Identificación de mesas pendientes de asignación                          |
+# | Mesas sin asignar | Identificación de mesas pendientes de asignación |
 
-# | Mesas ocupadas y disponibles    | Estado operativo de las mesas del restaurante                             |
+# | Mesas ocupadas y disponibles | Estado operativo de las mesas del restaurante |
 
-# | Pedidos realizados entre fechas | Consulta histórica utilizando filtros de fecha                            |
+# | Pedidos realizados entre fechas | Consulta histórica utilizando filtros de fecha |
 
-# | Pedidos asociados a una mesa    | Búsqueda de pedidos vinculados a una mesa específica                      |
+# | Pedidos asociados a una mesa | Búsqueda de pedidos vinculados a una mesa específica |
 
-# | Reasignaciones de mesas         | Historial de cambios en la asignación de mesas a meseros                  |
+# | Reasignaciones de mesas | Historial de cambios en la asignación de mesas a meseros |
 
-# | Ventas por fecha                | Consulta de importes generados durante una jornada determinada            |
+# | Ventas por fecha | Consulta de importes generados durante una jornada determinada |
 
 # 
 
@@ -393,13 +442,11 @@
 
 # 
 
-
-
 # \---
 
 # 
 
-# \# 🔒 8. Seguridad
+# \# 🔒 9. Seguridad
 
 # 
 
@@ -409,21 +456,29 @@
 
 # Cada usuario accederá únicamente a las funcionalidades habilitadas para su perfil, garantizando la seguridad y confidencialidad de la información.
 
-
-
-
+# 
 
 # \---
 
+# 
 
+# \# 🧪 10. Funcionalidades a Validar
 
 # 
 
-# \## 👤 Rol Cliente (A Validar)
+# Las siguientes funcionalidades se encuentran sujetas a validación por parte de la cátedra y podrían incorporarse en futuras iteraciones del proyecto.
 
 # 
 
-# Se propone incorporar un tercer perfil denominado \*\*Cliente\*\*, asociado a cada mesa del restaurante.
+# \---
+
+# 
+
+# \## 👤 Cliente Digital Asociado a una Mesa (A VALIDAR)
+
+# 
+
+# Se propone incorporar un tercer rol \*\*Cliente\*\*, asociado a cada mesa del restaurante.
 
 # 
 
@@ -431,79 +486,133 @@
 
 # 
 
-# \### Funcionamiento propuesto
+# \### Funcionalidades del Cliente
+
+# 
+
+# El cliente podrá:
+
+# 
+
+# \- Consultar el menú disponible.
+
+# \- Visualizar nombre del producto.
+
+# \- Visualizar descripción.
+
+# \- Visualizar precio.
+
+# \- Visualizar imagen ilustrativa.
+
+# \- Agregar productos a una comanda pendiente.
+
+# \- Enviar una comanda para su revisión.
+
+# 
+
+# El cliente NO podrá:
+
+# 
+
+# \- Confirmar comandas.
+
+# \- Modificar comandas enviadas.
+
+# \- Eliminar productos de comandas enviadas.
+
+# \- Cancelar comandas enviadas.
+
+# \- Cerrar pedidos.
+
+# 
+
+# \---
+
+# 
+
+# \### Flujo Propuesto
 
 # 
 
 # 1\. El mesero abre un pedido para una mesa.
 
-# 2\. Cada mesa posee un usuario cliente predefinido asociado.
+# 2\. El cliente accede al menú digital asociado a dicha mesa.
 
-# 3\. El cliente accede al menú digital de la mesa.
+# 3\. El cliente selecciona productos.
 
-# 4\. El cliente puede visualizar:
+# 4\. El sistema consulta el stock disponible al agregar unidades.
 
-# 
+# 5\. El cliente envía la comanda.
 
-# &#x20;  \* Nombre del producto.
+# 6\. La comanda queda pendiente de revisión.
 
-# &#x20;  \* Descripción.
+# 7\. El mesero recibe la solicitud.
 
-# &#x20;  \* Precio.
+# 8\. El mesero valida la comanda.
 
-# &#x20;  \* Imagen ilustrativa.
+# 9\. El sistema vuelve a verificar stock.
 
-# 5\. El cliente puede seleccionar productos y agregarlos a una comanda pendiente.
+# 10\. Si existe disponibilidad, la comanda es confirmada.
 
-# 6\. Cada vez que se solicita agregar una unidad de un producto, el sistema consulta el stock disponible.
+# 11\. Los productos se incorporan al pedido.
 
-# 7\. Si no existe stock suficiente, se informa al cliente que el producto no puede ser agregado.
+# 12\. Se descuenta el stock correspondiente.
 
-# 8\. Una vez finalizada la selección, el cliente envía la comanda.
-
-# 9\. El mesero recibe la solicitud pendiente de confirmación.
-
-# 10\. El mesero valida la comanda recibida.
-
-# 11\. Al confirmarse la comanda:
+# 13\. El cliente puede generar nuevas comandas mientras el pedido permanezca abierto.
 
 # 
 
-# &#x20;   \* Los productos se incorporan al pedido de la mesa.
-
-# &#x20;   \* Se descuenta el stock correspondiente.
+# \---
 
 # 
 
-# \### Restricciones del Cliente
+# \### Estados de una Comanda
 
 # 
 
-# Una vez enviada una comanda:
+# Cada comanda atravesará distintos estados:
 
 # 
 
-# \* El cliente no podrá modificar cantidades.
+# \- Pendiente.
 
-# \* El cliente no podrá eliminar productos.
+\- Confirmada.
+- Entregada.
+===
 
-# \* El cliente no podrá cancelar la comanda enviada.
-
-# 
-
-# Cualquier modificación posterior deberá ser realizada por el mesero.
+# \- Rechazada.
 
 # 
 
-# De esta manera se evita que existan inconsistencias entre la solicitud realizada por el cliente y la confirmación efectuada por el personal del restaurante.
+# Solamente las comandas confirmadas impactarán sobre el pedido y el stock.
 
 # 
 
-# \### Acumulación de Comandas
+# \---
 
 # 
 
-# Un pedido podrá contener múltiples comandas enviadas por el cliente mientras el pedido permanezca abierto.
+# \### Relación entre Pedido y Comandas
+
+# 
+
+# Un pedido representa la cuenta completa asociada a una mesa.
+
+# 
+
+# Una comanda representa una solicitud puntual realizada por el cliente dentro de ese pedido.
+
+# 
+
+# Mientras el pedido permanezca abierto:
+
+# 
+
+# \- El cliente podrá generar múltiples comandas.
+
+# \- Cada comanda será validada individualmente.
+
+# \- Todas las comandas confirmadas se consolidarán dentro del mismo pedido.
 
 # 
 
@@ -511,19 +620,23 @@
 
 # 
 
-# Primera comanda:
+# Pedido Mesa 5
 
 # 
 
-# \* 1 Jugo de naranja
+# Comanda 1:
 
 # 
 
-# Segunda comanda:
+# \- 1 Jugo de naranja
 
 # 
 
-# \* 1 Tostado
+# Comanda 2:
+
+# 
+
+# \- 1 Tostado
 
 # 
 
@@ -531,25 +644,73 @@
 
 # 
 
-# \* 1 Jugo de naranja
+# \- 1 Jugo de naranja
 
-# \* 1 Tostado
-
-# 
-
-# Todas las comandas aprobadas se consolidan dentro del mismo pedido asociado a la mesa.
+# \- 1 Tostado
 
 # 
 
-# \### Validación de Stock al Confirmar
+# \---
 
 # 
 
-# La disponibilidad definitiva del stock se verificará nuevamente al momento de la confirmación por parte del mesero.
+# \### Control Operativo del Mesero
 
 # 
 
-# Esto permite contemplar situaciones donde varios clientes solicitan simultáneamente un mismo producto.
+# El mesero será responsable de validar todas las comandas enviadas por los clientes.
+
+# 
+
+# Podrá:
+
+# 
+
+# \- Confirmar comandas.
+
+# \- Rechazar comandas.
+
+\- Eliminar productos sin stock.
+- Confirmar la entrega de la comanda.
+===
+
+# \- Modificar productos antes de la confirmación.
+
+# 
+
+# Toda modificación posterior al envío deberá ser realizada por el mesero.
+
+# 
+
+# \---
+
+# 
+
+# \### Política de Actualización de Stock
+
+# 
+
+# El stock NO será descontado cuando el cliente agregue productos a una comanda.
+
+# 
+
+# El descuento se realizará únicamente cuando el mesero confirme la comanda.
+
+# 
+
+# Esta decisión permite evitar bloqueos innecesarios de stock y manejar correctamente solicitudes simultáneas.
+
+# 
+
+# \---
+
+# 
+
+# \### Manejo de Solicitudes Simultáneas
+
+# 
+
+# Puede ocurrir que distintos clientes soliciten simultáneamente un producto con stock limitado.
 
 # 
 
@@ -561,7 +722,7 @@
 
 # 
 
-# \* Jugo de naranja: 1 unidad
+# \- Jugo de naranja: 1 unidad.
 
 # 
 
@@ -569,7 +730,7 @@
 
 # 
 
-# \* Solicita 1 jugo de naranja.
+# \- Solicita 1 jugo de naranja.
 
 # 
 
@@ -577,11 +738,11 @@
 
 # 
 
-# \* Solicita 1 jugo de naranja.
+# \- Solicita 1 jugo de naranja.
 
 # 
 
-# Ambas solicitudes pueden generarse correctamente porque todavía no se descontó stock.
+# Ambas comandas podrán generarse correctamente.
 
 # 
 
@@ -589,7 +750,7 @@
 
 # 
 
-# \* El stock pasa a ser 0.
+# \- El stock pasa a ser 0.
 
 # 
 
@@ -597,11 +758,19 @@
 
 # 
 
-# \* El sistema detectará que ya no existe stock disponible.
+# \- El sistema detectará la falta de stock.
 
-# \* Se mostrará una notificación indicando el faltante.
+# \- Se mostrará una notificación al mesero.
 
-# \* El producto sin stock deberá eliminarse de la comanda antes de poder continuar con la confirmación.
+# \- El producto deberá ser removido de la comanda antes de continuar con la confirmación.
+
+# 
+
+# De esta forma se evita que el stock pueda quedar en valores negativos.
+
+# 
+
+# \---
 
 # 
 
@@ -609,17 +778,51 @@
 
 # 
 
-# \* Agilizar la toma de pedidos.
+# \- Agilizar la toma de pedidos.
 
-# \* Reducir tiempos de espera.
+# \- Reducir tiempos de espera.
 
-# \* Disminuir errores de carga.
+# \- Disminuir errores de carga.
 
-# \* Permitir al cliente consultar el menú digital de forma autónoma.
+# \- Permitir al cliente consultar el menú digital de forma autónoma.
 
-# \* Mantener el control final del pedido bajo supervisión del mesero.
+# \- Mantener el control final del pedido bajo supervisión del mesero.
 
-# \* Evitar inconsistencias de stock ante solicitudes simultáneas.
+# \- Evitar inconsistencias de stock ante solicitudes simultáneas.
 
+# 
 
+# \---
+
+# 
+
+# \# 💻 11. Tecnologías Utilizadas
+
+# 
+
+# El proyecto será desarrollado utilizando las tecnologías y estructuras trabajadas durante la cursada:
+
+# 
+
+# \- ASP.NET WebForms
+
+# \- C#
+
+# \- SQL Server
+
+# \- .NET Framework
+
+# \- Arquitectura en capas:
+
+# &#x20; - Dominio
+
+# &#x20; - Negocio
+
+# &#x20; - Web
+
+# 
+
+# \---
+
+# 
 
