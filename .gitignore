@@ -1,113 +1,79 @@
-.vs/RestoBar.slnx/config/applicationhost.config
-.vs/RestoBar.slnx/FileContentIndex/4c6acf4d-cbc4-4a98-ad6b-3a61ba0bd665.vsidx
-.vs/RestoBar.slnx/FileContentIndex/778fa091-00e8-4d0f-9848-5a3c0afbea97.vsidx
-.vs/RestoBar.slnx/FileContentIndex/8e20f878-55d2-436d-8987-601e3566ace0.vsidx
-.vs/RestoBar.slnx/v18/.suo
-.vs/RestoBar.slnx/v18/DocumentLayout.backup.json
-.vs/RestoBar.slnx/v18/DocumentLayout.json
-RestoBar.slnx
-RestoWeb/bin/Antlr3.Runtime.pdb
-RestoWeb/bin/Microsoft.AspNet.FriendlyUrls.xml
-RestoWeb/bin/Newtonsoft.Json.xml
-.vs/RestoBar.slnx/config/applicationhost.config
-.vs/RestoBar.slnx/FileContentIndex/4c6acf4d-cbc4-4a98-ad6b-3a61ba0bd665.vsidx
-.vs/RestoBar.slnx/v18/.suo
-.vs/RestoBar.slnx/v18/DocumentLayout.backup.json
-.vs/RestoBar.slnx/v18/DocumentLayout.json
-RestoBar.slnx
-.vs/RestoBar.slnx/config/applicationhost.config
-/.vs/RestoBar.slnx/config
-.vs/RestoBar.slnx/config/applicationhost.config
-.vs/RestoBar.slnx/config/applicationhost.config
-.vs/RestoBar.slnx/FileContentIndex/4c6acf4d-cbc4-4a98-ad6b-3a61ba0bd665.vsidx
-.vs/RestoBar.slnx/v18/.suo
-.vs/RestoBar.slnx/v18/DocumentLayout.backup.json
-.vs/RestoBar.slnx/v18/DocumentLayout.json
-RestoBar.slnx
-RestoWeb/bin/RestoWeb.dll
-RestoWeb/bin/RestoWeb.dll.config
-RestoWeb/bin/RestoWeb.pdb
-RestoWeb/bin/roslyn/csc.exe
-RestoWeb/bin/roslyn/csc.exe.config
-RestoWeb/bin/roslyn/csc.rsp
-RestoWeb/bin/roslyn/csi.exe
-RestoWeb/bin/roslyn/csi.exe.config
-RestoWeb/bin/roslyn/csi.rsp
-RestoWeb/bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll
-RestoWeb/bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll
-RestoWeb/bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll
-RestoWeb/bin/roslyn/Microsoft.CodeAnalysis.dll
-RestoWeb/bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll
-RestoWeb/bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll
-RestoWeb/bin/roslyn/Microsoft.CSharp.Core.targets
-RestoWeb/bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll
-RestoWeb/bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll
-RestoWeb/bin/roslyn/Microsoft.Managed.Core.targets
-RestoWeb/bin/roslyn/Microsoft.VisualBasic.Core.targets
-RestoWeb/bin/roslyn/Microsoft.Win32.Primitives.dll
-RestoWeb/bin/roslyn/System.AppContext.dll
-RestoWeb/bin/roslyn/System.Collections.Immutable.dll
-RestoWeb/bin/roslyn/System.Console.dll
-RestoWeb/bin/roslyn/System.Diagnostics.DiagnosticSource.dll
-RestoWeb/bin/roslyn/System.Diagnostics.FileVersionInfo.dll
-RestoWeb/bin/roslyn/System.Diagnostics.StackTrace.dll
-RestoWeb/bin/roslyn/System.Globalization.Calendars.dll
-RestoWeb/bin/roslyn/System.IO.Compression.dll
-RestoWeb/bin/roslyn/System.IO.Compression.ZipFile.dll
-RestoWeb/bin/roslyn/System.IO.FileSystem.dll
-RestoWeb/bin/roslyn/System.IO.FileSystem.Primitives.dll
-RestoWeb/bin/roslyn/System.Net.Http.dll
-RestoWeb/bin/roslyn/System.Net.Sockets.dll
-RestoWeb/bin/roslyn/System.Reflection.Metadata.dll
-RestoWeb/bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll
-RestoWeb/bin/roslyn/System.Security.Cryptography.Algorithms.dll
-RestoWeb/bin/roslyn/System.Security.Cryptography.Encoding.dll
-RestoWeb/bin/roslyn/System.Security.Cryptography.Primitives.dll
-RestoWeb/bin/roslyn/System.Security.Cryptography.X509Certificates.dll
-RestoWeb/bin/roslyn/System.Text.Encoding.CodePages.dll
-RestoWeb/bin/roslyn/System.Threading.Tasks.Extensions.dll
-RestoWeb/bin/roslyn/System.ValueTuple.dll
-RestoWeb/bin/roslyn/System.Xml.ReaderWriter.dll
-RestoWeb/bin/roslyn/System.Xml.XmlDocument.dll
-RestoWeb/bin/roslyn/System.Xml.XPath.dll
-RestoWeb/bin/roslyn/System.Xml.XPath.XDocument.dll
-RestoWeb/bin/roslyn/vbc.exe
-RestoWeb/bin/roslyn/vbc.exe.config
-RestoWeb/bin/roslyn/vbc.rsp
-RestoWeb/bin/roslyn/VBCSCompiler.exe
-RestoWeb/bin/roslyn/VBCSCompiler.exe.config
-RestoWeb/bin/System.Web.Optimization.xml
-RestoWeb/obj/Debug/build.force
-RestoWeb/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-RestoWeb/obj/Debug/RestoWeb.csproj.AssemblyReference.cache
-RestoWeb/obj/Debug/RestoWeb.csproj.CoreCompileInputs.cache
-RestoWeb/obj/Debug/RestoWeb.csproj.FileListAbsolute.txt
-RestoWeb/obj/Debug/RestoWeb.csproj.Up2Date
-RestoWeb/obj/Debug/RestoWeb.dll
-RestoWeb/obj/Debug/RestoWeb.pdb
+# =========================
+
+# Visual Studio
+
+# =========================
+
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# =========================
+
+# Build Outputs
+
+# =========================
+
+bin/
+obj/
+
+# =========================
+
+# IIS Express
+
+# =========================
+
+applicationhost.config
+
+# =========================
+
+# Visual Studio Cache
+
+# =========================
+
 *.vsidx
-RestoWeb/obj/Debug/RestoWeb.csproj.AssemblyReference.cache
-RestoWeb/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-RestoWeb/obj/Debug/build.force
-RestoBar.slnx
-.vs/RestoBar.slnx/v18/DocumentLayout.json
-.vs/RestoBar.slnx/v18/DocumentLayout.backup.json
-.vs/RestoBar.slnx/v18/.suo
-.vs/RestoBar.slnx/FileContentIndex/4c6acf4d-cbc4-4a98-ad6b-3a61ba0bd665.vsidx
-.vs/RestoBar.slnx/config/applicationhost.config
-.vs/RestoBar.slnx/FileContentIndex/4c6acf4d-cbc4-4a98-ad6b-3a61ba0bd665.vsidx
-.vs/RestoBar.slnx/v18/.suo
-.vs/RestoBar.slnx/v18/DocumentLayout.backup.json
-.vs/RestoBar.slnx/v18/DocumentLayout.json
-RestoBar.slnx
-RestoWeb/obj/Debug/build.force
-RestoWeb/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-RestoWeb/obj/Debug/RestoWeb.csproj.AssemblyReference.cache
-.vs/RestoBar.slnx/FileContentIndex/4c6acf4d-cbc4-4a98-ad6b-3a61ba0bd665.vsidx
-.vs/RestoBar.slnx/v18/.suo
-.vs/RestoBar.slnx/v18/DocumentLayout.backup.json
-.vs/RestoBar.slnx/v18/DocumentLayout.json
-RestoBar.slnx
-RestoWeb/obj/Debug/build.force
-RestoWeb/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-RestoWeb/obj/Debug/RestoWeb.csproj.AssemblyReference.cache
+*.cache
+
+# =========================
+
+# NuGet
+
+# =========================
+
+packages/
+
+# =========================
+
+# Logs
+
+# =========================
+
+*.log
+
+# =========================
+
+# ReSharper
+
+# =========================
+
+_ReSharper*/
+*.DotSettings.user
+
+# =========================
+
+# Rider
+
+# =========================
+
+.idea/
+
+# =========================
+
+# Windows
+
+# =========================
+
+Thumbs.db
+Desktop.ini
