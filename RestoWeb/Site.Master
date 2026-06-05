@@ -70,7 +70,7 @@
                 <div class="nav-group">Administración</div>
                 <a href="/Usuarios/ListaUsuarios.aspx" class="nav-link">Usuarios</a>
                 <a href="/Insumos/ListaInsumos.aspx" class="nav-link">Insumos</a>
-                <a href="/Categorias/ListaCategorias.aspx" class="nav-link">Categorías</a>
+                <a href="/Categorias/ListaCategoria.aspx" class="nav-link">Categorías</a>
                 <div class="nav-group">Reportes</div>
                 <a href="/Reportes/Reportes.aspx" class="nav-link">Reportes</a>
             </div>

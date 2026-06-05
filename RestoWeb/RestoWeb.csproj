@@ -100,6 +100,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Categorias\FormularioCategoria.aspx" />
+    <Content Include="Categorias\ListaCategoria.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -121,6 +123,8 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Insumos\FormularioInsumos.aspx" />
+    <Content Include="Insumos\ListaInsumos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Mesas\FormularioMesa.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -197,6 +201,20 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Categorias\FormularioCategoria.aspx.cs">
+      <DependentUpon>FormularioCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Categorias\FormularioCategoria.aspx.designer.cs">
+      <DependentUpon>FormularioCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Categorias\ListaCategoria.aspx.cs">
+      <DependentUpon>ListaCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Categorias\ListaCategoria.aspx.designer.cs">
+      <DependentUpon>ListaCategoria.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -213,6 +231,20 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Insumos\FormularioInsumos.aspx.cs">
+      <DependentUpon>FormularioInsumos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Insumos\FormularioInsumos.aspx.designer.cs">
+      <DependentUpon>FormularioInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Insumos\ListaInsumos.aspx.cs">
+      <DependentUpon>ListaInsumos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Insumos\ListaInsumos.aspx.designer.cs">
+      <DependentUpon>ListaInsumos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -274,8 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Categorias\" />
-    <Folder Include="Insumos\" />
     <Folder Include="Pedidos\" />
     <Folder Include="Reportes\" />
   </ItemGroup>
