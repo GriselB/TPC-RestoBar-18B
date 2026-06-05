@@ -11,8 +11,27 @@ namespace RestoWeb.Categorias
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
+                if (!IsPostBack)
+                {
+                    var detalle = new[]
+                 {
+                        new{Descripcion="Bebida"},
+                        new{Descripcion="Plato"},
+                        new{Descripcion="Postre"},
+                        new{Descripcion="Entrada"}
+                 };
+                    dgvCategoria.DataSource = detalle;
+                    dgvCategoria.DataBind();
+
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                //Response.Redirect("Error.aspx"); Hay que crear la pagina de redirección cuando da error.
             }
         }
     }

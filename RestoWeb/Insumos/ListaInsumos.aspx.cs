@@ -11,8 +11,25 @@ namespace RestoWeb.Insumos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
+                if (!IsPostBack)
+                {
+                    var detalle = new[]
+                 {
+                        new{Nombre="Milanesa", Descripcion="Carne empanada y frita", Precio="$5000", Stock=1000, Categoria="Plato", Activo = true},
+                        new{Nombre="Coca Cola Zero", Descripcion="Tremenda gaseosa", Precio="$1000", Stock=7000, Categoria="Bebida", Activo = true}
+                 };
+                    dgvInsumos.DataSource = detalle;
+                    dgvInsumos.DataBind();
+                    
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                //Response.Redirect("Error.aspx"); Hay que crear la pagina de redirección cuando da error.
             }
 
         }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title=""  Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"  CodeBehind="FormularioInsumos.aspx.cs" Inherits="RestoWeb.Insumos.FormularioInsumos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FormularioInsumos.aspx.cs" Inherits="RestoWeb.Insumos.FormularioInsumos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -25,8 +25,8 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Categoria</label>
-                <asp:DropDownList ID="ddlCategoria"  runat="server" CssClass="form-select" ></asp:DropDownList> 
-           </div>
+                <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select"></asp:DropDownList>
+            </div>
             <div class="mb-3">
                 <asp:CheckBox ID="chkActivo" runat="server" Text=" Activo" Checked="true" />
             </div>
