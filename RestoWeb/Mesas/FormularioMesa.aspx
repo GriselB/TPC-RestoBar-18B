@@ -1,15 +1,27 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FormularioMesa.aspx.cs" Inherits="RestoWeb.Mesas.FormularioMesa" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FormularioMesa.aspx.cs" Inherits="RestoWeb.Mesas.FormularioMesa" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Label ID="lblTitulo" runat="server" CssClass="h4 mb-4 d-block" />
+    <div class="row">
+        <div class="col-6">
+            <div class="mb-3">
+                <label class="form-label">Número de mesa</label>
+                <asp:TextBox ID="txtNumero" runat="server" CssClass="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" />
+            </div>
+            <div class="mb-3">
+                <asp:CheckBox ID="chkActivo" runat="server" Text=" Activo" Checked="true" />
+            </div>
+            <div class="mb-3">
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-dark" OnClick="btnGuardar_Click" />
+                <a href="ListaMesas.aspx" class="btn btn-secondary">Cancelar</a>
+            </div>
         </div>
-    </form>
-</body>
-</html>
+    </div>
+</asp:Content>
