@@ -187,6 +187,7 @@
     <Content Include="Site.Master" />
     <Content Include="Mesas\ListaMesas.aspx" />
     <Content Include="Usuarios\FormularioUsuario.aspx" />
+    <Content Include="Usuarios\ListaUsuario.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -303,6 +304,13 @@
     </Compile>
     <Compile Include="Usuarios\FormularioUsuario.aspx.designer.cs">
       <DependentUpon>FormularioUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\ListaUsuario.aspx.cs">
+      <DependentUpon>ListaUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios\ListaUsuario.aspx.designer.cs">
+      <DependentUpon>ListaUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
