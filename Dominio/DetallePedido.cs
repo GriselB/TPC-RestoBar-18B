@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class DetallePedido
+    public class DetallePedido
     {
+
+        public int Id { get; set; }
+
+        public Pedido Pedido { get; set; }
+
+        public Insumo Insumo { get; set; }
+
+        public int Cantidad { get; set; }
+
+        public decimal PrecioUnitario { get; set; }
+
+        public bool Activo { get; set; }
+
     }
 }

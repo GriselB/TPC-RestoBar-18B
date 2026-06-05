@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class RolMenu
+    public class RolMenu
     {
+        public int Id { get; set; }
+
+        public Rol Rol { get; set; }
+
+        public Menu Menu { get; set; }
+
     }
 }

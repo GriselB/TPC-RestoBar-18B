@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class Mesa
+    public class Mesa
     {
+
+        public int Id { get; set; }
+
+        public int Numero { get; set; }
+
+        public string Descripcion { get; set; }
+
+        public bool Activo { get; set; }
+
     }
 }
