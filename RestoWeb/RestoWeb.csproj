@@ -185,9 +185,8 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="Usuarios\FormularioUsuario.aspx" />
     <Content Include="Mesas\ListaMesas.aspx" />
-    <Content Include="Usuarios\ListaUsuarios.aspx" />
+    <Content Include="Usuarios\FormularioUsuario.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -291,13 +290,6 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\FormularioUsuario.aspx.cs">
-      <DependentUpon>FormularioUsuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Usuarios\FormularioUsuario.aspx.designer.cs">
-      <DependentUpon>FormularioUsuario.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Mesas\ListaMesas.aspx.cs">
       <DependentUpon>ListaMesas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -305,12 +297,12 @@
     <Compile Include="Mesas\ListaMesas.aspx.designer.cs">
       <DependentUpon>ListaMesas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios\ListaUsuarios.aspx.cs">
-      <DependentUpon>ListaUsuarios.aspx</DependentUpon>
+    <Compile Include="Usuarios\FormularioUsuario.aspx.cs">
+      <DependentUpon>FormularioUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuarios\ListaUsuarios.aspx.designer.cs">
-      <DependentUpon>ListaUsuarios.aspx</DependentUpon>
+    <Compile Include="Usuarios\FormularioUsuario.aspx.designer.cs">
+      <DependentUpon>FormularioUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
