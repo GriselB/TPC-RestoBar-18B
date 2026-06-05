@@ -1,44 +1,82 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="RestoWeb._Default" %>
+﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="RestoWeb._Default" %>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
 
-    <main>
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-        </section>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <h4 class="mb-4">Estado de mesas</h4>
 
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
-            </section>
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center p-3">
+                <div class="text-muted" style="font-size:12px;">Total de mesas</div>
+                <div class="fs-4 fw-bold">6</div>
+            </div>
         </div>
-    </main>
+        <div class="col-md-3">
+            <div class="card text-center p-3">
+                <div class="text-muted" style="font-size:12px;">Mesas libres</div>
+                <div class="fs-4 fw-bold text-success">3</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center p-3">
+                <div class="text-muted" style="font-size:12px;">Mesas ocupadas</div>
+                <div class="fs-4 fw-bold text-danger">2</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center p-3">
+                <div class="text-muted" style="font-size:12px;">Pedidos abiertos</div>
+                <div class="fs-4 fw-bold text-warning">2</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card p-3 text-center bg-success text-white">
+                <h6 class="fw-bold">Mesa 1</h6>
+                <span style="font-size:12px;">Libre</span>
+                <small>Sin asignar</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card p-3 text-center bg-danger text-white">
+                <h6 class="fw-bold">Mesa 2</h6>
+                <span style="font-size:12px;">Ocupada</span>
+                <small>Aureliano Michilini</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card p-3 text-center bg-success text-white">
+                <h6 class="fw-bold">Mesa 3</h6>
+                <span style="font-size:12px;">Libre</span>
+                <small>Grisel Bonadies</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card p-3 text-center bg-danger text-white">
+                <h6 class="fw-bold">Mesa 4</h6>
+                <span style="font-size:12px;">Ocupada</span>
+                <small>Maxi Programa</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card p-3 text-center bg-success text-white">
+                <h6 class="fw-bold">Mesa 5</h6>
+                <span style="font-size:12px;">Libre</span>
+                <small>Regina Laurentino</small>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card p-3 text-center bg-secondary text-white" style="opacity:0.4;">
+                <h6 class="fw-bold">Mesa 6</h6>
+                <span style="font-size:12px;">Sin asignar</span>
+                <small>Otro mesero</small>
+            </div>
+        </div>
+    </div>
 
 </asp:Content>
