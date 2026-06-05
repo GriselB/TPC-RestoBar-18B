@@ -1,15 +1,25 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ListaMesas.aspx.cs" Inherits="RestoWeb.Usuarios.ListaMesas" %>
+﻿<%@ Page Title="Mesas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListaMesas.aspx.cs" Inherits="RestoWeb.Mesas.ListaMesas" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-</body>
-</html>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4>Mesas</h4>
+        <a href="FormularioMesa.aspx" class="btn btn-dark">+ Nueva mesa</a>
+    </div>
+
+    <asp:GridView ID="dgvMesas" runat="server" CssClass="table" AutoGenerateColumns="false">
+        <Columns>
+            <asp:BoundField HeaderText="Número" DataField="Numero" />
+            <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
+            <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
+            <asp:TemplateField HeaderText="Acciones">
+                <ItemTemplate>
+                    <a href="FormularioMesa.aspx" class="btn btn-sm btn-secondary">Editar</a>
+                    <asp:Button runat="server" Text="Baja" CssClass="btn btn-sm btn-danger" />
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+    </asp:GridView>
+</asp:Content>
