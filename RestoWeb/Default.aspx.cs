@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI;
+using Dominio;
+using Negocio;
 
 namespace RestoWeb
 {
@@ -9,6 +12,11 @@ namespace RestoWeb
         {
             if (!IsPostBack)
             {
+                MesaNegocio negocio = new MesaNegocio();
+                List<Mesa> mesas = negocio.listar();
+
+                repMesas.DataSource = mesas;
+                repMesas.DataBind();
             }
         }
     }

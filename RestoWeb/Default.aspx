@@ -34,49 +34,22 @@
     </div>
 
 
-    <div class="row">
+<asp:Repeater ID="repMesas" runat="server">
+    <HeaderTemplate>
+        <div class="row">
+    </HeaderTemplate>
+    <ItemTemplate>
         <div class="col-md-3 mb-3">
             <div class="card p-3 text-center bg-success text-white">
-                <h6 class="fw-bold">Mesa 1</h6>
+                <h6 class="fw-bold">Mesa <%# Eval("Numero") %></h6>
                 <span style="font-size:12px;">Libre</span>
-                <small>Sin asignar</small>
+                <small><%# Eval("Descripcion") %></small>
             </div>
         </div>
-        <div class="col-md-3 mb-3">
-            <div class="card p-3 text-center bg-danger text-white">
-                <h6 class="fw-bold">Mesa 2</h6>
-                <span style="font-size:12px;">Ocupada</span>
-                <small>Aureliano Michilini</small>
-            </div>
+    </ItemTemplate>
+    <FooterTemplate>
         </div>
-        <div class="col-md-3 mb-3">
-            <div class="card p-3 text-center bg-success text-white">
-                <h6 class="fw-bold">Mesa 3</h6>
-                <span style="font-size:12px;">Libre</span>
-                <small>Grisel Bonadies</small>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card p-3 text-center bg-danger text-white">
-                <h6 class="fw-bold">Mesa 4</h6>
-                <span style="font-size:12px;">Ocupada</span>
-                <small>Maxi Programa</small>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card p-3 text-center bg-success text-white">
-                <h6 class="fw-bold">Mesa 5</h6>
-                <span style="font-size:12px;">Libre</span>
-                <small>Regina Laurentino</small>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card p-3 text-center bg-secondary text-white" style="opacity:0.4;">
-                <h6 class="fw-bold">Mesa 6</h6>
-                <span style="font-size:12px;">Sin asignar</span>
-                <small>Otro mesero</small>
-            </div>
-        </div>
-    </div>
+    </FooterTemplate>
+</asp:Repeater>
 
 </asp:Content>
