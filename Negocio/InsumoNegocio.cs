@@ -94,5 +94,40 @@ namespace Negocio
             }
         }
 
+        public void modificarInsumo(Insumo insumo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"UPDATE INSUMOS SET 
+                Nombre = @Nombre,
+                Descripcion = @Descripcion,
+                Precio = @Precio,
+                Stock = @Stock,
+                IdCategoria = @IdCategoria,
+                Activo = @Activo
+                 WHERE Id = @Id");
+
+                datos.setearParametro("@Id", insumo.Id);
+                datos.setearParametro("@Nombre", insumo.Nombre);
+                datos.setearParametro("@Descripcion", insumo.Descripcion);
+                datos.setearParametro("@Precio", insumo.Precio);
+                datos.setearParametro("@Stock", insumo.Stock);
+                datos.setearParametro("@IdCategoria", insumo.Categoria.Id);
+                datos.setearParametro("@Activo", insumo.Activo);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

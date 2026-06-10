@@ -13,11 +13,31 @@ namespace RestoWeb.Insumos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                cargarCategorias();
+                if (!IsPostBack)
+                {
+                    cargarCategorias();
+
+                    if (Request.QueryString["id"] != null)
+                    {
+                        lblTitulo.Text = "Editar insumo";
+
+                        int id = int.Parse(Request.QueryString["id"]);
+                        cargarInsumo(id);
+                    }
+                    else
+                    {
+                        lblTitulo.Text = "Nuevo insumo";
+                    }
+                }
             }
-            
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                // Response.Redirect("Error.aspx");
+            }
+
         }
         private void cargarCategorias()
         {
@@ -29,6 +49,24 @@ namespace RestoWeb.Insumos
             ddlCategoria.DataBind();
 
             ddlCategoria.Items.Insert(0, new ListItem("Seleccione una categoría", ""));
+        }
+        private void cargarInsumo(int id)
+        {
+            InsumoNegocio negocio = new InsumoNegocio();
+
+            Insumo insumo = negocio.listar().Find(x => x.Id == id);
+
+            if (insumo != null)
+            {
+                txtNombre.Text = insumo.Nombre;
+                txtDescripcion.Text = insumo.Descripcion;
+                txtPrecio.Text = insumo.Precio.ToString();
+                txtStock.Text = insumo.Stock.ToString();
+
+                ddlCategoria.SelectedValue = insumo.Categoria.Id.ToString();
+
+                chkActivo.Checked = insumo.Activo;
+            }
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -59,15 +97,23 @@ namespace RestoWeb.Insumos
                 nuevo.Activo = chkActivo.Checked;
 
                 InsumoNegocio negocio = new InsumoNegocio();
-                negocio.agregarInsumo(nuevo);
+
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    negocio.modificarInsumo(nuevo);
+                }
+                else
+                {
+                    negocio.agregarInsumo(nuevo);
+                }
 
                 Response.Redirect("ListaInsumos.aspx", false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
-
         }
     }
 }
