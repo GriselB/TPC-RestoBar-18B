@@ -16,27 +16,50 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, Nombre, Descripcion, Precio,Stock,IdCategoria,Activo FROM INSUMOS WHERE Activo = 1");
+                datos.setearConsulta(@"
+                    SELECT 
+                        I.Id,
+                        I.Nombre,
+                        I.Descripcion,
+                        I.Precio,
+                        I.Stock,
+                        I.IdCategoria,
+                        I.Activo,
+                        C.Descripcion AS CategoriaDescripcion
+                    FROM INSUMOS I
+                    INNER JOIN CATEGORIAS C ON C.Id = I.IdCategoria
+                    WHERE I.Activo = 1
+                ");
+
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Insumo aux = new Insumo();
+
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+
                     aux.Precio = (decimal)datos.Lector["Precio"];
                     aux.Stock = (int)datos.Lector["Stock"];
+
                     aux.Categoria = new Categoria();
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
-                    aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
+                    aux.Categoria.Descripcion = (string)datos.Lector["CategoriaDescripcion"];
+
+                    aux.Activo = (bool)datos.Lector["Activo"];
+
                     lista.Add(aux);
                 }
+
                 return lista;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {

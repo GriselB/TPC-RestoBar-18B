@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,14 +16,8 @@ namespace RestoWeb.Insumos
             {
                 if (!IsPostBack)
                 {
-                    var detalle = new[]
-                 {
-                        new{Nombre="Milanesa", Descripcion="Carne empanada y frita", Precio="$5000", Stock=1000, Categoria="Plato", Activo = true},
-                        new{Nombre="Coca Cola Zero", Descripcion="Tremenda gaseosa", Precio="$1000", Stock=7000, Categoria="Bebida", Activo = true}
-                 };
-                    dgvInsumos.DataSource = detalle;
-                    dgvInsumos.DataBind();
-                    
+                    cargarInsumos();
+
                 }
             }
 
@@ -32,6 +27,15 @@ namespace RestoWeb.Insumos
                 //Response.Redirect("Error.aspx"); Hay que crear la pagina de redirección cuando da error.
             }
 
+           
+
+    }
+        private void cargarInsumos()
+        {
+            InsumoNegocio negocio = new InsumoNegocio();
+
+            dgvInsumos.DataSource = negocio.listar();
+            dgvInsumos.DataBind();
         }
-}
+    }
 }
