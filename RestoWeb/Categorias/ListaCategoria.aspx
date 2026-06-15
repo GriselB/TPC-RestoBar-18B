@@ -9,13 +9,13 @@
         <a href="FormularioCategoria.aspx" class="btn btn-dark">+ Nueva Categoria</a>
     </div>
 
-    <asp:GridView ID="dgvCategoria" runat="server" CssClass="table" AutoGenerateColumns="false">
+    <asp:GridView ID="dgvCategoria" runat="server" CssClass="table" AutoGenerateColumns="false" OnRowCommand="dgvCategoria_RowCommand" >
         <Columns>
             <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
                     <a href="FormularioCategoria.aspx?id=<%# Eval("Id") %>" class="btn btn-sm btn-secondary">Editar</a>
-                    <asp:Button runat="server" Text="Baja" CssClass="btn btn-sm btn-danger" />
+                    <asp:Button runat="server" Text="Baja" CssClass="btn btn-sm btn-danger"  CommandName="Baja" CommandArgument='<%# Eval("Id") %>' OnClientClick="return confirm('¿Estás seguro que querés eliminar esta Categoria?');" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

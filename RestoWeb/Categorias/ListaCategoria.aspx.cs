@@ -36,5 +36,18 @@ namespace RestoWeb.Categorias
             dgvCategoria.DataSource = negocio.listar();
             dgvCategoria.DataBind();
         }
+
+        protected void dgvCategoria_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Baja")
+            {
+                int id = int.Parse(e.CommandArgument.ToString());
+
+                CategoriaNegocio negocio = new CategoriaNegocio();
+                negocio.EliminarCategoria(id);
+
+                cargarCategorias();
+            }
+        }
     }
 }

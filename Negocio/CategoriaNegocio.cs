@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, Descripcion FROM CATEGORIAS");
+                datos.setearConsulta("SELECT Id, Descripcion FROM CATEGORIAS where Activo = 1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -73,14 +73,34 @@ namespace Negocio
                 if (existeCategoriaParaEdicion(categoria.Descripcion, categoria.Id))
                     throw new Exception("Ya existe otra categoría con esa descripción.");
 
-                datos.setearConsulta(@"
-            UPDATE CATEGORIAS 
-            SET Descripcion = @Descripcion
-            WHERE Id = @Id
-        ");
+                datos.setearConsulta(@"UPDATE CATEGORIAS SET Descripcion = @Descripcion WHERE Id = @Id");
 
                 datos.setearParametro("@Id", categoria.Id);
                 datos.setearParametro("@Descripcion", categoria.Descripcion);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void EliminarCategoria(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                
+
+                datos.setearConsulta(@"UPDATE CATEGORIAS SET Activo = 0 WHERE Id = @Id");
+
+                datos.setearParametro("@Id", id);
+                
 
                 datos.ejecutarAccion();
             }
