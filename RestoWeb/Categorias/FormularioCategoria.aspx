@@ -5,11 +5,12 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label ID="lblTitulo" runat="server" CssClass="h4 mb-4 d-block" />
+    <asp:Label  ID="lblError"  runat="server" CssClass="alert alert-danger d-block"  Visible="false" />
     <div class="row">
         <div class="col-6">
             <div class="mb-3">
                 <label class="form-label">Descripcion</label>
-                <asp:TextBox ID="txtNumero" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" />
             </div>
             <div class="mb-3">
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-dark" OnClick="btnGuardar_Click" />

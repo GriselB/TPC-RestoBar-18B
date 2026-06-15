@@ -14,7 +14,7 @@
             <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
-                    <a href="FormularioCategoria.aspx" class="btn btn-sm btn-secondary">Editar</a>
+                    <a href="FormularioCategoria.aspx?id=<%# Eval("Id") %>" class="btn btn-sm btn-secondary">Editar</a>
                     <asp:Button runat="server" Text="Baja" CssClass="btn btn-sm btn-danger" />
                 </ItemTemplate>
             </asp:TemplateField>
