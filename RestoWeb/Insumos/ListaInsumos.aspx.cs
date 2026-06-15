@@ -17,7 +17,7 @@ namespace RestoWeb.Insumos
                 if (!IsPostBack)
                 {
                     cargarInsumos();
-
+                    cargarCategorias();
                 }
             }
 
@@ -34,8 +34,28 @@ namespace RestoWeb.Insumos
         {
             InsumoNegocio negocio = new InsumoNegocio();
 
-            dgvInsumos.DataSource = negocio.listar();
+            string nombre = txtFiltroNombre.Text.Trim();
+
+            int idCategoria = 0;
+
+            if (!string.IsNullOrEmpty(ddlFiltroCategoria.SelectedValue))
+                idCategoria = int.Parse(ddlFiltroCategoria.SelectedValue);
+
+            bool soloStockCero = chkStockCero.Checked;
+
+            dgvInsumos.DataSource = negocio.listar(nombre, idCategoria, soloStockCero);
             dgvInsumos.DataBind();
+        }
+        private void cargarCategorias()
+        {
+            CategoriaNegocio negocio = new CategoriaNegocio();
+
+            ddlFiltroCategoria.DataSource = negocio.listar();
+            ddlFiltroCategoria.DataTextField = "Descripcion";
+            ddlFiltroCategoria.DataValueField = "Id";
+            ddlFiltroCategoria.DataBind();
+
+            ddlFiltroCategoria.Items.Insert(0, new ListItem("Seleccione una categoría", ""));
         }
         protected void dgvInsumos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -48,6 +68,10 @@ namespace RestoWeb.Insumos
 
                 cargarInsumos();
             }
+        }
+        protected void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            cargarInsumos();
         }
     }
 }

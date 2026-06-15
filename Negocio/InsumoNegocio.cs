@@ -9,14 +9,26 @@ namespace Negocio
 {
     public class InsumoNegocio
     {
-        public List<Insumo> listar()
+        public List<Insumo> listar(string nombre, int idCategoria, bool soloStockCero)
         {
             List<Insumo> lista = new List<Insumo>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta(@"SELECT I.Id, I.Nombre, I.Descripcion, I.Precio,I.Stock, I.IdCategoria, C.Descripcion AS CategoriaDescripcion FROM INSUMOS I INNER JOIN CATEGORIAS C ON C.Id = I.IdCategoria WHERE I.Activo = 1");
+
+                string consulta = @"SELECT I.Id, I.Nombre, I.Descripcion, I.Precio,I.Stock, I.IdCategoria, C.Descripcion AS CategoriaDescripcion FROM INSUMOS I INNER JOIN CATEGORIAS C ON C.Id = I.IdCategoria WHERE I.Activo = 1";
+
+                if (!string.IsNullOrWhiteSpace(nombre))
+                    consulta += " AND I.Nombre LIKE @nombre";
+
+                if (idCategoria > 0)
+                    consulta += " AND I.IdCategoria = @idCategoria";
+
+                if (soloStockCero)
+                    consulta += " AND I.Stock = 0";
+
+                datos.setearConsulta(consulta);
 
                 datos.ejecutarLectura();
 
@@ -199,7 +211,8 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
+        
+        
 
 
     }
