@@ -72,6 +72,9 @@ namespace RestoWeb.Insumos
         {
             try
             {
+                lblError.Visible = false;
+                lblError.Text = "";
+
                 if (string.IsNullOrWhiteSpace(txtNombre.Text))
                     throw new Exception("Debe ingresar un nombre.");
 
@@ -101,18 +104,21 @@ namespace RestoWeb.Insumos
                 if (Request.QueryString["id"] != null)
                 {
                     nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    nuevo.Nombre = txtNombre.Text.Trim();
                     negocio.modificarInsumo(nuevo);
                 }
                 else
                 {
+                    nuevo.Nombre = txtNombre.Text.Trim();
                     negocio.agregarInsumo(nuevo);
                 }
 
                 Response.Redirect("ListaInsumos.aspx", false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                lblError.Text = ex.Message;
+                lblError.Visible = true;
             }
         }
     }
