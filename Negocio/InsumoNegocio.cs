@@ -24,7 +24,7 @@ namespace Negocio
                         I.Precio,
                         I.Stock,
                         I.IdCategoria,
-                        I.Activo,
+                        
                         C.Descripcion AS CategoriaDescripcion
                     FROM INSUMOS I
                     INNER JOIN CATEGORIAS C ON C.Id = I.IdCategoria
@@ -50,7 +50,7 @@ namespace Negocio
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.Categoria.Descripcion = (string)datos.Lector["CategoriaDescripcion"];
 
-                    aux.Activo = (bool)datos.Lector["Activo"];
+                   
 
                     lista.Add(aux);
                 }
@@ -105,8 +105,8 @@ namespace Negocio
                 Descripcion = @Descripcion,
                 Precio = @Precio,
                 Stock = @Stock,
-                IdCategoria = @IdCategoria,
-                Activo = @Activo
+                IdCategoria = @IdCategoria
+                
                  WHERE Id = @Id");
 
                 datos.setearParametro("@Id", insumo.Id);
@@ -115,8 +115,30 @@ namespace Negocio
                 datos.setearParametro("@Precio", insumo.Precio);
                 datos.setearParametro("@Stock", insumo.Stock);
                 datos.setearParametro("@IdCategoria", insumo.Categoria.Id);
-                datos.setearParametro("@Activo", insumo.Activo);
+                
 
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarInsumo(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"UPDATE INSUMOS SET Activo = 0 WHERE Id = @Id");
+
+                datos.setearParametro("@Id", id);
+                
                 datos.ejecutarAccion();
             }
             catch (Exception)

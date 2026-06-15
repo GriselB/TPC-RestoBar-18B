@@ -65,7 +65,7 @@ namespace RestoWeb.Insumos
 
                 ddlCategoria.SelectedValue = insumo.Categoria.Id.ToString();
 
-                chkActivo.Checked = insumo.Activo;
+                
             }
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -94,7 +94,7 @@ namespace RestoWeb.Insumos
                 nuevo.Categoria = new Categoria();
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
-                nuevo.Activo = chkActivo.Checked;
+              
 
                 InsumoNegocio negocio = new InsumoNegocio();
 

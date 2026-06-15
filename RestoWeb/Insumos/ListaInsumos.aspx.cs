@@ -37,5 +37,17 @@ namespace RestoWeb.Insumos
             dgvInsumos.DataSource = negocio.listar();
             dgvInsumos.DataBind();
         }
+        protected void dgvInsumos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Baja")
+            {
+                int id = int.Parse(e.CommandArgument.ToString());
+
+                InsumoNegocio negocio = new InsumoNegocio();
+                negocio.eliminarInsumo(id);
+
+                cargarInsumos();
+            }
+        }
     }
 }

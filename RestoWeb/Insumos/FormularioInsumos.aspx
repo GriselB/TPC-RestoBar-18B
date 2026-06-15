@@ -27,9 +27,7 @@
                 <label class="form-label">Categoria</label>
                 <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select"></asp:DropDownList>
             </div>
-            <div class="mb-3">
-                <asp:CheckBox ID="chkActivo" runat="server" Text=" Activo" Checked="true" />
-            </div>
+            
             <div class="mb-3">
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-dark" OnClick="btnGuardar_Click" />
                 <a href="ListaInsumos.aspx" class="btn btn-secondary">Cancelar</a>
