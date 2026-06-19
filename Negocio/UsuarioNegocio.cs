@@ -64,6 +64,8 @@ namespace Negocio
 
             try
             {
+                if (existeNombreUsuario(nuevo.NombreUsuario))
+                    throw new Exception("Ya existe un usuario con ese nombre de usuario.");
                 datos.setearConsulta(@"INSERT INTO USUARIOS (NombreUsuario, Pass, Nombre, Apellido, IdRol, Activo) 
                                 VALUES (@NombreUsuario, @Pass, @Nombre, @Apellido, @IdRol, @Activo)");
 
@@ -86,5 +88,35 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public bool existeNombreUsuario(string nombreUsuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"SELECT COUNT(*) AS Cantidad FROM USUARIOS WHERE NombreUsuario = @NombreUsuario AND Activo = 1");
+
+                datos.setearParametro("@NombreUsuario", nombreUsuario);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    int cantidad = (int)datos.Lector["Cantidad"];
+                    return cantidad > 0;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

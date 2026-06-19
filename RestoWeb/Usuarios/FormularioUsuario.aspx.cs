@@ -64,8 +64,8 @@ namespace RestoWeb.Usuarios
             }
             catch (Exception ex)
             {
-                throw ex;
-                // mas adelante hay que hacer el manejo bien, por ahora solo hago throw ex para poder tener el catch bien en caso de que rompa en algun lado
+                lblError.Text = ex.Message;
+                lblError.Visible = true;
             }
         }
     }
