@@ -89,15 +89,54 @@ namespace Negocio
             }
         }
 
-        public bool existeNombreUsuario(string nombreUsuario)
+        public void modificarUsuario(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta(@"SELECT COUNT(*) AS Cantidad FROM USUARIOS WHERE NombreUsuario = @NombreUsuario AND Activo = 1");
+                if (existeNombreUsuario(usuario.NombreUsuario, usuario.Id))
+                    throw new Exception("Ya existe otro usuario con ese nombre de usuario.");
 
+                datos.setearConsulta(@"UPDATE USUARIOS SET NombreUsuario = @NombreUsuario, Pass = @Pass, 
+                        Nombre = @Nombre, Apellido = @Apellido, IdRol = @IdRol WHERE Id = @Id");
+
+                datos.setearParametro("@NombreUsuario", usuario.NombreUsuario);
+                datos.setearParametro("@Pass", usuario.Pass);
+                datos.setearParametro("@Nombre", usuario.Nombre);
+                datos.setearParametro("@Apellido", usuario.Apellido);
+                datos.setearParametro("@IdRol", usuario.Rol.Id);
+                datos.setearParametro("@Id", usuario.Id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool existeNombreUsuario(string nombreUsuario, int idExiste = 0)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = @"SELECT COUNT(*) AS Cantidad FROM USUARIOS WHERE NombreUsuario = @NombreUsuario AND Activo = 1";
+
+                if (idExiste > 0)
+                    consulta += " AND Id <> @Id";
+
+                datos.setearConsulta(consulta);
                 datos.setearParametro("@NombreUsuario", nombreUsuario);
+
+                if (idExiste > 0)
+                    datos.setearParametro("@Id", idExiste);
+
                 datos.ejecutarLectura();
 
                 if (datos.Lector.Read())
@@ -117,6 +156,5 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
     }
 }
