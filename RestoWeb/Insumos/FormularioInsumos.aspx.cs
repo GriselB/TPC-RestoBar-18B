@@ -54,7 +54,8 @@ namespace RestoWeb.Insumos
         {
             InsumoNegocio negocio = new InsumoNegocio();
 
-            Insumo insumo = negocio.listar().Find(x => x.Id == id);
+            //Tuve que hacer una corrección en el código porque al llamar a .listar no se estaba pasando ningun argumento y el método exige 3, lo dejo así para que compile pero después hay que corregirlo
+            Insumo insumo = negocio.listar("", 0, false).Find(x => x.Id == id);
 
             if (insumo != null)
             {
