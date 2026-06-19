@@ -23,7 +23,7 @@ namespace RestoWeb.Usuarios
                 }
 
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                if (id != "")
+                if (id != "" && !IsPostBack)
                 {
                     lblTitulo.Text = "Editar usuario";
                     chkActivo.Visible = true;
