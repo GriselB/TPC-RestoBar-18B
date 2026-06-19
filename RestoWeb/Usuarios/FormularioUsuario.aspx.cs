@@ -27,6 +27,15 @@ namespace RestoWeb.Usuarios
                 {
                     lblTitulo.Text = "Editar usuario";
                     chkActivo.Visible = true;
+
+                    UsuarioNegocio negocioUsuario = new UsuarioNegocio();
+                    Usuario seleccionado = (negocioUsuario.listar(int.Parse(id))[0]);
+
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtApellido.Text = seleccionado.Apellido;
+                    txtNombreUsuario.Text = seleccionado.NombreUsuario;
+                    ddlRol.SelectedValue = seleccionado.Rol.Id.ToString();
+                    chkActivo.Checked = seleccionado.Activo;
                 }
                 else
                     lblTitulo.Text = "Nuevo usuario";

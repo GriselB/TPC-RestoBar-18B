@@ -15,11 +15,9 @@
             <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
             <asp:BoundField HeaderText="Usuario" DataField="NombreUsuario" />
             <asp:BoundField HeaderText="Rol" DataField="Rol.Descripcion" />
-            <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
                     <a href='FormularioUsuario.aspx?id=<%# Eval("Id") %>' class="btn btn-sm btn-secondary">Editar</a>
-                    <asp:Button runat="server" Text="Baja" CssClass="btn btn-sm btn-danger" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
