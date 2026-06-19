@@ -68,7 +68,7 @@
                 <a href="/Mesas/ListaMesas.aspx" class="nav-link">Mesas</a>
                 <a href="/Pedidos/PedidoEnCurso.aspx" class="nav-link">Pedidos</a>
                 <div class="nav-group">Administración</div>
-                <a href="/Usuarios/ListaUsuarios.aspx" class="nav-link">Usuarios</a>
+                <a href="/Usuarios/ListaUsuario.aspx" class="nav-link">Usuarios</a>
                 <a href="/Insumos/ListaInsumos.aspx" class="nav-link">Insumos</a>
                 <a href="/Categorias/ListaCategoria.aspx" class="nav-link">Categorías</a>
                 <div class="nav-group">Reportes</div>

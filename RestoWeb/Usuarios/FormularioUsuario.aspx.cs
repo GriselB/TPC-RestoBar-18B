@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using Dominio;
+using Negocio;
 
 namespace RestoWeb.Usuarios
 {
@@ -10,12 +13,23 @@ namespace RestoWeb.Usuarios
             {
                 if (!IsPostBack)
                 {
-                    string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                    if (id != "")
-                        lblTitulo.Text = "Editar usuario";
-                    else
-                        lblTitulo.Text = "Nuevo usuario";
+                    RolNegocio negocio = new RolNegocio();
+                    List<Rol> lista = negocio.listar();
+
+                    ddlRol.DataSource = lista;
+                    ddlRol.DataValueField = "Id";
+                    ddlRol.DataTextField = "Descripcion";
+                    ddlRol.DataBind();
                 }
+
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                if (id != "")
+                {
+                    lblTitulo.Text = "Editar usuario";
+                    chkActivo.Visible = true;
+                }
+                else
+                    lblTitulo.Text = "Nuevo usuario";
             }
             catch (Exception ex)
             {
@@ -25,6 +39,34 @@ namespace RestoWeb.Usuarios
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Usuario nuevo = new Usuario();
+                UsuarioNegocio negocio = new UsuarioNegocio();
+
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.Apellido = txtApellido.Text;
+                nuevo.NombreUsuario = txtNombreUsuario.Text;
+                nuevo.Pass = txtPass.Text;
+
+                nuevo.Rol = new Rol();
+                nuevo.Rol.Id = int.Parse(ddlRol.SelectedValue);
+
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    //negocio.modificarUsuario(nuevo); 
+                }
+                else
+                    negocio.agregarUsuario(nuevo);
+
+                Response.Redirect("ListaUsuario.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                // mas adelante hay que hacer el manejo bien, por ahora solo hago throw ex para poder tener el catch bien en caso de que rompa en algun lado
+            }
         }
     }
 }

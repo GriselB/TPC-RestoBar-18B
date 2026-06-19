@@ -28,11 +28,11 @@
                 <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-select" />
             </div>
             <div class="mb-3">
-                <asp:CheckBox ID="chkActivo" runat="server" Text=" Activo" Checked="true" />
+                <asp:CheckBox ID="chkActivo" runat="server" Text=" Activo" Checked="true" Visible="false" />
             </div>
             <div class="mb-3">
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-dark" OnClick="btnGuardar_Click" />
-                <a href="ListaUsuarios.aspx" class="btn btn-secondary">Cancelar</a>
+                <a href="ListaUsuario.aspx" class="btn btn-secondary">Cancelar</a>
             </div>
         </div>
     </div>
