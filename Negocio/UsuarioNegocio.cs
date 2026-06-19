@@ -57,5 +57,34 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void agregarUsuario(Usuario nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"INSERT INTO USUARIOS (NombreUsuario, Pass, Nombre, Apellido, IdRol, Activo) 
+                                VALUES (@NombreUsuario, @Pass, @Nombre, @Apellido, @IdRol, @Activo)");
+
+                datos.setearParametro("@NombreUsuario", nuevo.NombreUsuario);
+                datos.setearParametro("@Pass", nuevo.Pass);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Apellido", nuevo.Apellido);
+                datos.setearParametro("@IdRol", nuevo.Rol.Id);
+                datos.setearParametro("@Activo", true);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //Va a ser necesario generar el Error.aspx que nos quedó pendiente, para que pueda devolver la excepción en caso de que falle
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
