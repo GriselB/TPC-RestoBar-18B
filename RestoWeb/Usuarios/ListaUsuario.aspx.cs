@@ -9,22 +9,23 @@ using Dominio;
 
 namespace RestoWeb.Usuarios
 {
-    public partial class ListaUsuarios : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
+        public partial class ListaUsuario : System.Web.UI.Page
         {
-            if (!IsPostBack)
+            protected void Page_Load(object sender, EventArgs e)
             {
-                var usuarios = new[]
+                if (!IsPostBack)
                 {
-                    new { Nombre = "Maxi", Apellido = "Programa", NombreUsuario = "mPrograma", Rol = "Mesero", Activo = true, Id = 1 },
-                    new { Nombre = "Regina", Apellido = "Laurentino", NombreUsuario = "rLaurentino", Rol = "Mesero", Activo = true, Id = 2 },
-                    new { Nombre = "Admin", Apellido = "", NombreUsuario = "admin", Rol = "Gerente", Activo = true, Id = 3 }
-                };
+                    cargarUsuarios();
+                }
+            }
+
+            private void cargarUsuarios()
+            {
+                UsuarioNegocio negocio = new UsuarioNegocio();
+                List<Usuario> usuarios = negocio.listar();
 
                 dgvUsuarios.DataSource = usuarios;
                 dgvUsuarios.DataBind();
             }
         }
     }
-}

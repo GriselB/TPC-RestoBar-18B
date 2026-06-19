@@ -11,7 +11,7 @@ namespace RestoWeb.Usuarios
 {
 
 
-    public partial class ListaUsuarios
+    public partial class ListaUsuario
     {
 
         /// <summary>

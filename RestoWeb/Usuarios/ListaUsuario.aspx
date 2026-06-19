@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListaUsuarios.aspx.cs" Inherits="RestoWeb.Usuarios.ListaUsuarios" %>
+﻿<%@ Page Title="Usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListaUsuario.aspx.cs" Inherits="RestoWeb.Usuarios.ListaUsuario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -14,7 +14,7 @@
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
             <asp:BoundField HeaderText="Usuario" DataField="NombreUsuario" />
-            <asp:BoundField HeaderText="Rol" DataField="Rol" />
+            <asp:BoundField HeaderText="Rol" DataField="Rol.Descripcion" />
             <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
