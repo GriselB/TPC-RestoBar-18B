@@ -87,6 +87,21 @@ namespace RestoWeb.Insumos
 
                 if (ddlCategoria.SelectedValue == "")
                     throw new Exception("Debe seleccionar una categoría.");
+                if (precio <= 0)
+                    throw new Exception("El precio debe ser mayor a cero.");
+
+                if (stock < 0)
+                    throw new Exception("El stock no puede ser negativo.");
+
+                if (!int.TryParse(ddlCategoria.SelectedValue, out int idCategoria))
+                    throw new Exception("Debe seleccionar una categoría válida.");
+
+                if (txtNombre.Text.Trim().Length > 50)
+                    throw new Exception("El nombre no puede superar los 50 caracteres.");
+
+                if (txtDescripcion.Text.Trim().Length > 200)
+                    throw new Exception("La descripción no puede superar los 200 caracteres.");
+
 
                 Insumo nuevo = new Insumo();
 
