@@ -30,6 +30,9 @@ namespace Negocio
 
                 datos.setearConsulta(consulta);
 
+                datos.setearParametro("@nombre", "%" + nombre + "%");
+                datos.setearParametro("@idCategoria", idCategoria);
+
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
