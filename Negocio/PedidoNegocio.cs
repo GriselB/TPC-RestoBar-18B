@@ -49,5 +49,33 @@ namespace Negocio
             }
         }
 
+        public void cerrarPedido(int idPedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"
+                UPDATE PEDIDOS
+                SET 
+                    FechaCierre = GETDATE(),
+                    Activo = 0
+                WHERE Id = @idPedido
+                  AND Activo = 1
+            ");
+
+                datos.setearParametro("@idPedido", idPedido);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
