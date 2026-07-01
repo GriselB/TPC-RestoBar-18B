@@ -13,11 +13,10 @@
         <Columns>
             <asp:BoundField HeaderText="Número" DataField="Numero" />
             <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
-            <asp:BoundField HeaderText="Mesero asignado" DataField="Mesero" />
             <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
-                    <a href='FormularioMesa.aspx?id=<%# Eval("Numero") %>' class="btn btn-sm btn-secondary">Editar</a>
+                    <a href='FormularioMesa.aspx?id=<%# Eval("Id") %>' class="btn btn-sm btn-secondary">Editar</a>
                     <asp:Button runat="server" Text="Baja" CssClass="btn btn-sm btn-danger" />
                 </ItemTemplate>
             </asp:TemplateField>
