@@ -5,6 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label ID="lblTitulo" runat="server" CssClass="h4 mb-4 d-block" />
+    <asp:Label ID="lblError" runat="server" CssClass="alert alert-danger d-block" Visible="false" />
     <div class="row">
         <div class="col-6">
             <div class="mb-3">

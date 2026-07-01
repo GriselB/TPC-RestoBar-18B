@@ -33,6 +33,36 @@ namespace RestoWeb.Mesas
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtNumero.Text))
+                    throw new Exception("El campo Número de mesa es obligatorio.");
+
+                if (!int.TryParse(txtNumero.Text, out int numero))
+                    throw new Exception("El Número de mesa debe ser un valor numérico.");
+
+                Mesa mesa = new Mesa();
+                MesaNegocio negocio = new MesaNegocio();
+
+                mesa.Numero = numero;
+                mesa.Descripcion = txtDescripcion.Text;
+
+                if (Request.QueryString["id"] != null)
+                {
+                    mesa.Id = int.Parse(Request.QueryString["id"]);
+                    mesa.Activo = chkActivo.Checked;
+                    //negocio.modificarMesa(mesa);
+                }
+                else
+                    negocio.agregarMesa(mesa);
+
+                Response.Redirect("ListaMesas.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+                lblError.Visible = true;
+            }
         }
     }
 }
