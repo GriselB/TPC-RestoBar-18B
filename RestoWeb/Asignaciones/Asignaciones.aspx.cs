@@ -1,11 +1,60 @@
 ﻿using System;
-using System.Web.UI;
+using System.Collections.Generic;
+using System.Web.UI.WebControls;
+using Dominio;
+using Negocio;
 
 namespace RestoWeb.Mesas
 {
     public partial class Asignaciones : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+                cargarGrilla();
+        }
+
+        private void cargarGrilla()
+        {
+            AsignacionNegocio negocio = new AsignacionNegocio();
+            UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+
+            List<Asignacion> asignaciones = negocio.listarVigentes();
+            List<Usuario> meseros = usuarioNegocio.listar().FindAll(x => Seguridad.esMesero(x) && x.Activo);
+
+            var filas = new System.Collections.ArrayList();
+            foreach (Asignacion a in asignaciones)
+            {
+                filas.Add(new
+                {
+                    IdMesa = a.Mesa.Id,
+                    NumeroMesa = "Mesa " + a.Mesa.Numero,
+                    DescripcionMesa = a.Mesa.Descripcion,
+                    MeseroActual = a.Usuario != null ? a.Usuario.NombreCompleto : "Sin asignar"
+                });
+            }
+
+            Session["listaMeseros"] = meseros;
+            dgvAsignaciones.DataSource = filas;
+            dgvAsignaciones.DataBind();
+
+            foreach (GridViewRow fila in dgvAsignaciones.Rows)
+            {
+                DropDownList ddl = (DropDownList)fila.FindControl("ddlMesero");
+                ddl.DataSource = meseros;
+                ddl.DataTextField = "NombreCompleto";
+                ddl.DataValueField = "Id";
+                ddl.DataBind();
+                ddl.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un mesero", "0"));
+            }
+        }
+
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+            cargarGrilla();
+        }
+
+        protected void btnAsignar_Click(object sender, EventArgs e)
         {
         }
     }
