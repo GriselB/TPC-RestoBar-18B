@@ -1,8 +1,7 @@
 ﻿using Dominio;
-using Negocio;
 using System;
 using System.Collections.Generic;
-using System.Web.UI;
+using Negocio;
 
 namespace RestoWeb.Mesas
 {
@@ -14,15 +13,55 @@ namespace RestoWeb.Mesas
             {
                 MesaNegocio negocio = new MesaNegocio();
                 Session["listaMesas"] = negocio.listar();
-                cargarGrilla();
+                filtrar();
             }
         }
 
-        private void cargarGrilla()
+        private void filtrar()
         {
-            dgvMesas.DataSource = Session["listaMesas"];
+            List<Mesa> lista = (List<Mesa>)Session["listaMesas"];
+
+            string textoBusqueda = txtBusqueda.Text.ToUpper();
+            string campo = ddlCampoBusqueda.SelectedValue;
+
+            if (!string.IsNullOrWhiteSpace(textoBusqueda))
+            {
+                if (campo == "Numero")
+                    lista = lista.FindAll(x => x.Numero.ToString().Contains(textoBusqueda));
+                else if (campo == "Descripcion")
+                    lista = lista.FindAll(x => x.Descripcion != null && x.Descripcion.ToUpper().Contains(textoBusqueda));
+            }
+
+            string estado = ddlEstado.SelectedValue;
+            if (estado == "Activo")
+                lista = lista.FindAll(x => x.Activo);
+            else if (estado == "Inactivo")
+                lista = lista.FindAll(x => !x.Activo);
+
+            dgvMesas.DataSource = lista;
             dgvMesas.DataBind();
+        }
+
+        protected void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        protected void ddlCampoBusqueda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+            MesaNegocio negocio = new MesaNegocio();
+            Session["listaMesas"] = negocio.listar();
+            filtrar();
         }
     }
 }
-
