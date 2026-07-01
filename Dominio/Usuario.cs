@@ -17,6 +17,7 @@ namespace Dominio
         public string Nombre { get; set; }
 
         public string Apellido { get; set; }
+        public string NombreCompleto { get { return Nombre + " " + Apellido; } }
 
         public Rol Rol { get; set; }
 
