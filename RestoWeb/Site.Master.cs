@@ -17,6 +17,17 @@ namespace RestoWeb
                 {
                     Usuario usuario = (Usuario)Session["usuario"];
                     lblUsuario.Text = usuario.NombreCompleto;
+
+                    bool esGerente = Seguridad.esGerente(Session["usuario"]);
+
+                    lnkMesas.Visible = esGerente;
+                    lnkAsignaciones.Visible = esGerente;
+                    navAdministracion.Visible = esGerente;
+                    lnkUsuarios.Visible = esGerente;
+                    lnkInsumos.Visible = esGerente;
+                    lnkCategorias.Visible = esGerente;
+                    navReportes.Visible = esGerente;
+                    lnkReportes.Visible = esGerente;
                 }
             }
         }

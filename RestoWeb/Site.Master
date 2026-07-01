@@ -12,7 +12,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -20,13 +20,50 @@
 
     <%-- Intenté llevarlo al Site.css pero no me está tomando los estilos, lo dejo por ahora acá pero mañana lo soluciono --%>
     <style>
-        html, body { height: 100%; margin: 0; }
-        .sidebar { width: 220px; min-height: 100vh; background-color: #212529; padding-top: 10px; flex-shrink: 0; }
-        .sidebar .nav-group { font-size: 10px; color: #adb5bd; padding: 12px 16px 4px; text-transform: uppercase; letter-spacing: 0.08em; }
-        .sidebar .nav-link { color: #adb5bd; padding: 8px 16px; font-size: 14px; display: block; }
-        .sidebar .nav-link:hover { color: #fff; background-color: #2c3034; }
-        .sidebar .nav-link.active { color: #fff; border-left: 3px solid #fff; background-color: #2c3034; }
-        .content-area { flex: 1; padding: 24px; min-height: 100vh; }
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .sidebar {
+            width: 220px;
+            min-height: 100vh;
+            background-color: #212529;
+            padding-top: 10px;
+            flex-shrink: 0;
+        }
+
+            .sidebar .nav-group {
+                font-size: 10px;
+                color: #adb5bd;
+                padding: 12px 16px 4px;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+
+            .sidebar .nav-link {
+                color: #adb5bd;
+                padding: 8px 16px;
+                font-size: 14px;
+                display: block;
+            }
+
+                .sidebar .nav-link:hover {
+                    color: #fff;
+                    background-color: #2c3034;
+                }
+
+                .sidebar .nav-link.active {
+                    color: #fff;
+                    border-left: 3px solid #fff;
+                    background-color: #2c3034;
+                }
+
+        .content-area {
+            flex: 1;
+            padding: 24px;
+            min-height: 100vh;
+        }
     </style>
 
 </head>
@@ -65,14 +102,15 @@
             <div class="sidebar">
                 <a href="/" class="nav-link">Inicio</a>
                 <div class="nav-group">Operación</div>
-                <a href="/Mesas/ListaMesas.aspx" class="nav-link">Mesas</a>
+                <a href="/Mesas/ListaMesas.aspx" class="nav-link" id="lnkMesas" runat="server">Mesas</a>
+                <a href="/Mesas/Asignaciones.aspx" class="nav-link" id="lnkAsignaciones" runat="server">Asignación de mesas</a>
                 <a href="/Pedidos/PedidoEnCurso.aspx" class="nav-link">Pedidos</a>
-                <div class="nav-group">Administración</div>
-                <a href="/Usuarios/ListaUsuario.aspx" class="nav-link">Usuarios</a>
-                <a href="/Insumos/ListaInsumos.aspx" class="nav-link">Insumos</a>
-                <a href="/Categorias/ListaCategoria.aspx" class="nav-link">Categorías</a>
-                <div class="nav-group">Reportes</div>
-                <a href="/Reportes/Reportes.aspx" class="nav-link">Reportes</a>
+                <div class="nav-group" id="navAdministracion" runat="server">Administración</div>
+                <a href="/Usuarios/ListaUsuario.aspx" class="nav-link" id="lnkUsuarios" runat="server">Usuarios</a>
+                <a href="/Insumos/ListaInsumos.aspx" class="nav-link" id="lnkInsumos" runat="server">Insumos</a>
+                <a href="/Categorias/ListaCategoria.aspx" class="nav-link" id="lnkCategorias" runat="server">Categorías</a>
+                <div class="nav-group" id="navReportes" runat="server">Reportes</div>
+                <a href="/Reportes/Reportes.aspx" class="nav-link" id="lnkReportes" runat="server">Reportes</a>
             </div>
             <div class="content-area">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
