@@ -65,11 +65,12 @@ namespace Negocio
             {
                 if (existeNombreUsuario(nuevo.NombreUsuario))
                     throw new Exception("Ya existe un usuario con ese nombre de usuario.");
+
                 datos.setearConsulta(@"INSERT INTO USUARIOS (NombreUsuario, Pass, Nombre, Apellido, IdRol, Activo) 
-                                VALUES (@NombreUsuario, @Pass, @Nombre, @Apellido, @IdRol, @Activo)");
+                        VALUES (@NombreUsuario, @Pass, @Nombre, @Apellido, @IdRol, @Activo)");
 
                 datos.setearParametro("@NombreUsuario", nuevo.NombreUsuario);
-                datos.setearParametro("@Pass", nuevo.Pass);
+                datos.setearParametro("@Pass", "RestoBar!1234#");
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Apellido", nuevo.Apellido);
                 datos.setearParametro("@IdRol", nuevo.Rol.Id);
@@ -149,6 +150,28 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void resetearPassword(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE USUARIOS SET Pass = @Pass WHERE Id = @Id");
+                datos.setearParametro("@Pass", "RestoBar!1234#");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //Va a ser necesario generar el Error.aspx que nos quedó pendiente
             }
             finally
             {
