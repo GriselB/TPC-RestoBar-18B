@@ -49,5 +49,28 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void agregarMesa(Mesa nueva)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO MESAS (Numero, Descripcion, Activo) VALUES (@Numero, @Descripcion, @Activo)");
+                datos.setearParametro("@Numero", nueva.Numero);
+                datos.setearParametro("@Descripcion", nueva.Descripcion);
+                datos.setearParametro("@Activo", true);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //Va a ser necesario generar el Error.aspx que nos quedó pendiente
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
