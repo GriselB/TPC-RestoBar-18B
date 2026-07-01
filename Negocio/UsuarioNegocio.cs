@@ -177,5 +177,51 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public Usuario login(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta(@"SELECT U.Id, U.NombreUsuario, U.Nombre, U.Apellido, U.Activo,
+                                        R.Id AS IdRol, R.Descripcion AS RolDescripcion
+                                 FROM USUARIOS U
+                                 INNER JOIN ROLES R ON R.Id = U.IdRol
+                                 WHERE U.NombreUsuario = @NombreUsuario 
+                                 AND U.Pass = @Pass");
+
+                datos.setearParametro("@NombreUsuario", usuario.NombreUsuario);
+                datos.setearParametro("@Pass", usuario.Pass);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    bool activo = bool.Parse(datos.Lector["Activo"].ToString());
+
+                    if (!activo)
+                        throw new Exception("El usuario se encuentra inactivo. Comuníquese con el administrador.");
+
+                    usuario.Id = (int)datos.Lector["Id"];
+                    usuario.Nombre = (string)datos.Lector["Nombre"];
+                    usuario.Apellido = (string)datos.Lector["Apellido"];
+                    usuario.Activo = activo;
+
+                    usuario.Rol = new Rol();
+                    usuario.Rol.Id = (int)datos.Lector["IdRol"];
+                    usuario.Rol.Descripcion = (string)datos.Lector["RolDescripcion"];
+
+                    return usuario;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
