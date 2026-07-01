@@ -102,5 +102,30 @@ namespace Negocio
                 datos2.cerrarConexion();
             }
         }
+
+        public void QuitarAsignacion(int idMesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"UPDATE ASIGNACIONES SET FechaCierre = @FechaCierre, Activo = 0
+                               WHERE IdMesa = @IdMesa 
+                               AND FechaCierre IS NULL 
+                               AND Activo = 1");
+
+                datos.setearParametro("@FechaCierre", DateTime.Now);
+                datos.setearParametro("@IdMesa", idMesa);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
