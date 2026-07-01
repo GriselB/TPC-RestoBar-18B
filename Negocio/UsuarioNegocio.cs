@@ -16,8 +16,7 @@ namespace Negocio
                 string consulta = @"SELECT U.Id, U.NombreUsuario, U.Pass, U.Nombre, U.Apellido, U.Activo,
                                             R.Id AS IdRol, R.Descripcion AS RolDescripcion
                                      FROM USUARIOS U
-                                     INNER JOIN ROLES R ON R.Id = U.IdRol
-                                     WHERE U.Activo = 1";
+                                     INNER JOIN ROLES R ON R.Id = U.IdRol";
 
                 if (id > 0)
                     consulta += " AND U.Id = @Id";

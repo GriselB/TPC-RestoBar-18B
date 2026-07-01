@@ -64,7 +64,7 @@ namespace RestoWeb.Usuarios
                 if (Request.QueryString["id"] != null)
                 {
                     nuevo.Id = int.Parse(Request.QueryString["id"]);
-                    //negocio.modificarUsuario(nuevo); 
+                    negocio.modificarUsuario(nuevo); 
                 }
                 else
                     negocio.agregarUsuario(nuevo);
