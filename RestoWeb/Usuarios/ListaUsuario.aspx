@@ -9,12 +9,39 @@
         <a href="FormularioUsuario.aspx" class="btn btn-dark">+ Nuevo usuario</a>
     </div>
 
+    <div class="row mb-3">
+        <div class="col-3">
+            <asp:DropDownList ID="ddlCampoBusqueda" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCampoBusqueda_SelectedIndexChanged">
+                <asp:ListItem Text="Nombre" Value="Nombre" />
+                <asp:ListItem Text="Apellido" Value="Apellido" />
+                <asp:ListItem Text="Usuario" Value="NombreUsuario" />
+            </asp:DropDownList>
+        </div>
+        <div class="col-4">
+            <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control" placeholder="Inserte texto aquí" AutoPostBack="true" OnTextChanged="txtBusqueda_TextChanged" />
+        </div>
+        <div class="col-5 d-flex justify-content-end gap-2">
+            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged">
+                <asp:ListItem Text="Todos" Value="Todos" />
+                <asp:ListItem Text="Activo" Value="Activo" />
+                <asp:ListItem Text="Inactivo" Value="Inactivo" />
+            </asp:DropDownList>
+            <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlRol_SelectedIndexChanged">
+                <asp:ListItem Text="Todos" Value="0" />
+                <asp:ListItem Text="Gerente" Value="1" />
+                <asp:ListItem Text="Mesero" Value="2" />
+            </asp:DropDownList>
+            <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" CssClass="btn btn-secondary" OnClick="btnActualizar_Click" />
+        </div>
+    </div>
+
     <asp:GridView ID="dgvUsuarios" runat="server" CssClass="table" AutoGenerateColumns="false">
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
             <asp:BoundField HeaderText="Usuario" DataField="NombreUsuario" />
             <asp:BoundField HeaderText="Rol" DataField="Rol.Descripcion" />
+            <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
                     <a href='FormularioUsuario.aspx?id=<%# Eval("Id") %>' class="btn btn-sm btn-secondary">Editar</a>
