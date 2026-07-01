@@ -46,6 +46,10 @@ namespace RestoWeb.Mesas
                 ddl.DataValueField = "Id";
                 ddl.DataBind();
                 ddl.Items.Insert(0, new System.Web.UI.WebControls.ListItem("Seleccione un mesero", "0"));
+
+                string meseroActual = fila.Cells[2].Text;
+                Button btnQuitar = (Button)fila.FindControl("btnQuitarAsignacion");
+                btnQuitar.Visible = meseroActual != "Sin asignar";
             }
         }
 
@@ -70,6 +74,31 @@ namespace RestoWeb.Mesas
                 negocio.asignar(idMesa, int.Parse(ddl.SelectedValue));
 
                 lblExito.Text = "Mesa asignada correctamente.";
+                lblExito.Visible = true;
+                lblError.Visible = false;
+
+                cargarGrilla();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+                lblError.Visible = true;
+                lblExito.Visible = false;
+            }
+        }
+
+        protected void btnQuitarAsignacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                GridViewRow fila = (GridViewRow)btn.NamingContainer;
+                int idMesa = int.Parse(dgvAsignaciones.DataKeys[fila.RowIndex].Value.ToString());
+
+                AsignacionNegocio negocio = new AsignacionNegocio();
+                negocio.QuitarAsignacion(idMesa);
+
+                lblExito.Text = "Asignación quitada correctamente.";
                 lblExito.Visible = true;
                 lblError.Visible = false;
 

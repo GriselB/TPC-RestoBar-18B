@@ -22,6 +22,7 @@
                     <div class="d-flex gap-2 align-items-center">
                         <asp:DropDownList ID="ddlMesero" runat="server" CssClass="form-select" />
                         <asp:Button ID="btnAsignar" runat="server" Text="Asignar" CssClass="btn btn-sm btn-dark" OnClick="btnAsignar_Click" />
+                        <asp:Button ID="btnQuitarAsignacion" runat="server" Text="Quitar asignación" CssClass="btn btn-sm btn-danger" OnClick="btnQuitarAsignacion_Click" Visible="false" />
                     </div>
                 </ItemTemplate>
             </asp:TemplateField>
