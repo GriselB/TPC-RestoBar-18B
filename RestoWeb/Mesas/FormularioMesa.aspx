@@ -17,7 +17,7 @@
                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" />
             </div>
             <div class="mb-3">
-                <asp:CheckBox ID="chkActivo" runat="server" Text=" Habilitada" Checked="true" />
+                <asp:CheckBox ID="chkActivo" runat="server" Text=" Habilitada" Checked="true" CssClass="d-none" />
             </div>
             <div class="mb-3">
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-dark" OnClick="btnGuardar_Click" />

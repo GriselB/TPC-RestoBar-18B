@@ -76,6 +76,33 @@ namespace Negocio
             }
         }
 
+        public void modificarMesa(Mesa mesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                if (existeNumeroMesa(mesa.Numero, mesa.Id))
+                    throw new Exception("Ya existe una mesa con ese número.");
+
+                datos.setearConsulta("UPDATE MESAS SET Numero = @Numero, Descripcion = @Descripcion, Activo = @Activo WHERE Id = @Id");
+                datos.setearParametro("@Numero", mesa.Numero);
+                datos.setearParametro("@Descripcion", mesa.Descripcion);
+                datos.setearParametro("@Activo", mesa.Activo);
+                datos.setearParametro("@Id", mesa.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //Va a ser necesario generar el Error.aspx que nos quedó pendiente
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public bool existeNumeroMesa(int numero, int idExiste = 0)
         {
             AccesoDatos datos = new AccesoDatos();

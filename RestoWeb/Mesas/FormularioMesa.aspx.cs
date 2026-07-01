@@ -19,7 +19,18 @@ namespace RestoWeb.Mesas
                 {
                     string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
                     if (id != "")
-                        lblTitulo.Text = "Editar mesa N° " + id;
+                    {
+                        MesaNegocio negocio = new MesaNegocio();
+                        Mesa seleccionada = negocio.listar(int.Parse(id))[0];
+
+                        lblTitulo.Text = "Editar mesa N° " + seleccionada.Numero;
+                        txtNumero.Text = seleccionada.Numero.ToString();
+                        txtDescripcion.Text = seleccionada.Descripcion;
+                        chkActivo.Checked = seleccionada.Activo;
+                        chkActivo.CssClass = "";
+
+                    }
+
                     else
                         lblTitulo.Text = "Nueva mesa";
                 }
@@ -54,7 +65,7 @@ namespace RestoWeb.Mesas
                 {
                     mesa.Id = int.Parse(Request.QueryString["id"]);
                     mesa.Activo = chkActivo.Checked;
-                    //negocio.modificarMesa(mesa);
+                    negocio.modificarMesa(mesa);
                 }
                 else
                     negocio.agregarMesa(mesa);
