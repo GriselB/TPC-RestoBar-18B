@@ -39,7 +39,10 @@ namespace RestoWeb.Mesas
                     throw new Exception("El campo Número de mesa es obligatorio.");
 
                 if (!int.TryParse(txtNumero.Text, out int numero))
-                    throw new Exception("El Número de mesa debe ser un valor numérico.");
+                    throw new Exception("El número de mesa debe ser un número entero.");
+
+                if (numero <= 0)
+                    throw new Exception("El número de mesa debe ser mayor a cero.");
 
                 Mesa mesa = new Mesa();
                 MesaNegocio negocio = new MesaNegocio();

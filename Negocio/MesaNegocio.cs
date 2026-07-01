@@ -56,6 +56,9 @@ namespace Negocio
 
             try
             {
+                if (existeNumeroMesa(nueva.Numero))
+                    throw new Exception("Ya existe una mesa con ese número.");
+
                 datos.setearConsulta("INSERT INTO MESAS (Numero, Descripcion, Activo) VALUES (@Numero, @Descripcion, @Activo)");
                 datos.setearParametro("@Numero", nueva.Numero);
                 datos.setearParametro("@Descripcion", nueva.Descripcion);
@@ -66,6 +69,43 @@ namespace Negocio
             {
                 throw ex;
                 //Va a ser necesario generar el Error.aspx que nos quedó pendiente
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool existeNumeroMesa(int numero, int idExiste = 0)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = "SELECT COUNT(*) AS Cantidad FROM MESAS WHERE Numero = @Numero";
+
+                if (idExiste > 0)
+                    consulta += " AND Id <> @Id";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@Numero", numero);
+
+                if (idExiste > 0)
+                    datos.setearParametro("@Id", idExiste);
+
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    int cantidad = (int)datos.Lector["Cantidad"];
+                    return cantidad > 0;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {
