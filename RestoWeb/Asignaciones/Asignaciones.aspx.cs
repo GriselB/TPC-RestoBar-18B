@@ -56,6 +56,31 @@ namespace RestoWeb.Mesas
 
         protected void btnAsignar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Button btn = (Button)sender;
+                GridViewRow fila = (GridViewRow)btn.NamingContainer;
+                int idMesa = int.Parse(dgvAsignaciones.DataKeys[fila.RowIndex].Value.ToString());
+                DropDownList ddl = (DropDownList)fila.FindControl("ddlMesero");
+
+                if (ddl.SelectedValue == "0")
+                    throw new Exception("Debe seleccionar un mesero.");
+
+                AsignacionNegocio negocio = new AsignacionNegocio();
+                negocio.asignar(idMesa, int.Parse(ddl.SelectedValue));
+
+                lblExito.Text = "Mesa asignada correctamente.";
+                lblExito.Visible = true;
+                lblError.Visible = false;
+
+                cargarGrilla();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+                lblError.Visible = true;
+                lblExito.Visible = false;
+            }
         }
     }
 }
