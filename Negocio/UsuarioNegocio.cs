@@ -98,11 +98,10 @@ namespace Negocio
                 if (existeNombreUsuario(usuario.NombreUsuario, usuario.Id))
                     throw new Exception("Ya existe otro usuario con ese nombre de usuario.");
 
-                datos.setearConsulta(@"UPDATE USUARIOS SET NombreUsuario = @NombreUsuario, Pass = @Pass, 
+                datos.setearConsulta(@"UPDATE USUARIOS SET NombreUsuario = @NombreUsuario, 
                         Nombre = @Nombre, Apellido = @Apellido, IdRol = @IdRol WHERE Id = @Id");
 
                 datos.setearParametro("@NombreUsuario", usuario.NombreUsuario);
-                datos.setearParametro("@Pass", usuario.Pass);
                 datos.setearParametro("@Nombre", usuario.Nombre);
                 datos.setearParametro("@Apellido", usuario.Apellido);
                 datos.setearParametro("@IdRol", usuario.Rol.Id);
