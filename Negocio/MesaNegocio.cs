@@ -16,10 +16,10 @@ namespace Negocio
 
             try
             {
-                string consulta = "SELECT Id, Numero, Descripcion, Activo FROM MESAS WHERE Activo = 1";
+                string consulta = "SELECT Id, Numero, Descripcion, Activo FROM MESAS";
 
                 if (id > 0)
-                    consulta += " AND Id = @Id";
+                    consulta += " WHERE Id = @Id";
 
                 datos.setearConsulta(consulta);
 
