@@ -15,5 +15,10 @@ namespace Dominio
         {
             return Descripcion;
         }
+        public enum RolEnum
+        {
+            Gerente = 1,
+            Mesero = 2
+        }
     }
 }
