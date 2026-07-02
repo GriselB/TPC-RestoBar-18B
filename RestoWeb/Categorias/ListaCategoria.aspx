@@ -8,7 +8,12 @@
         <h4>Categorias</h4>
         <a href="FormularioCategoria.aspx" class="btn btn-dark">+ Nueva Categoria</a>
     </div>
-
+     <asp:Label 
+        ID="lblError" 
+        runat="server" 
+        CssClass="alert alert-danger d-block" 
+        Visible="false">
+    </asp:Label>
     <asp:GridView ID="dgvCategoria" runat="server" CssClass="table" AutoGenerateColumns="false" OnRowCommand="dgvCategoria_RowCommand" >
         <Columns>
             <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />

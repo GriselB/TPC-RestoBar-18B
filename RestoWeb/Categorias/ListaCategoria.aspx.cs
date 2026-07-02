@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -52,7 +53,17 @@ namespace RestoWeb.Categorias
                 int id = int.Parse(e.CommandArgument.ToString());
 
                 CategoriaNegocio negocio = new CategoriaNegocio();
-                negocio.EliminarCategoria(id);
+                if (negocio.categoriaSinInsumosActivos(id))
+                {
+                    negocio.EliminarCategoria(id);
+                }
+                else
+                {
+                    lblError.Text = "No se pueden eliminar cateogrias vinculadas a Insumos activos";
+                    lblError.Visible = true;
+                   
+                }
+                
 
                 cargarCategorias();
             }

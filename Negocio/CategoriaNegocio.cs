@@ -178,5 +178,33 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool categoriaSinInsumosActivos(int idCategoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"
+            SELECT COUNT(*) 
+            FROM INSUMOS 
+            WHERE IdCategoria = @idCategoria 
+              AND Activo = 1
+        ");
+
+                datos.setearParametro("@idCategoria", idCategoria);
+
+                int cantidad = datos.ejecutarAccionScalar();
+
+                return cantidad == 0;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
