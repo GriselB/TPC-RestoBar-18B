@@ -14,6 +14,15 @@ namespace RestoWeb
             if (!IsPostBack)
                 cargarMesas();
 
+            if(Seguridad.esMesero(Session["usuario"]))
+                {
+                Usuario usuario = (Usuario)Session["usuario"];
+                cargarMesas(usuario.Id); }
+            else
+            {
+                cargarMesas();
+            }
+
             repMesas.DataSource = Session["listaMesas"];
             repMesas.DataBind();
         }
@@ -61,7 +70,12 @@ namespace RestoWeb
             List<Mesa> mesas = negocio.listar().FindAll(x => x.Activo);
             Session["listaMesas"] = mesas;
         }
-
+        private void cargarMesas(int id)
+        {
+            MesaNegocio negocio = new MesaNegocio();
+            List<Mesa> mesas = negocio.listarMesasPorUsuario(id);
+            Session["listaMesas"] = mesas;
+        }
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
             hfMostrarModal.Value = "0";

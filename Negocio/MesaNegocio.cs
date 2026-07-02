@@ -168,5 +168,54 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public List<Mesa> listarMesasPorUsuario(int idUsuario)
+        {
+            List<Mesa> lista = new List<Mesa>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"
+                    SELECT DISTINCT
+                        M.Id,
+                        M.Numero,
+                        M.Descripcion,
+                        M.Activo
+                    FROM MESAS M
+                    INNER JOIN ASIGNACIONES A ON A.IdMesa = M.Id
+                    WHERE A.IdUsuario = @idUsuario
+                    AND A.Activo = 1
+                    AND A.FechaCierre IS NULL
+                    AND M.Activo = 1
+                    ORDER BY M.Numero
+                ");
+
+                datos.setearParametro("@idUsuario", idUsuario);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Mesa aux = new Mesa();
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Numero = (int)datos.Lector["Numero"];
+                    aux.Descripcion = datos.Lector["Descripcion"] != DBNull.Value ? (string)datos.Lector["Descripcion"] : "";
+                    aux.Activo = (bool)datos.Lector["Activo"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
