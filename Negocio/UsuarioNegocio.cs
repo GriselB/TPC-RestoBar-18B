@@ -98,6 +98,12 @@ namespace Negocio
                 if (existeNombreUsuario(usuario.NombreUsuario, usuario.Id))
                     throw new Exception("Ya existe otro usuario con ese nombre de usuario.");
 
+                if (!usuario.Activo && usuarioTieneAsignacionesOPedidosVigentes(usuario.Id))
+                    throw new Exception("No se puede desactivar: el usuario tiene mesas asignadas y/o pedidos en curso. Cierre esos pedidos y quite las asignaciones primero.");
+
+                datos.setearConsulta(@"UPDATE USUARIOS SET NombreUsuario = @NombreUsuario, 
+        Nombre = @Nombre, Apellido = @Apellido, IdRol = @IdRol, Activo = @Activo WHERE Id = @Id");
+
                 datos.setearConsulta(@"UPDATE USUARIOS SET NombreUsuario = @NombreUsuario, 
                         Nombre = @Nombre, Apellido = @Apellido, IdRol = @IdRol, Activo = @Activo WHERE Id = @Id");
 
