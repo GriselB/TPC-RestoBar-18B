@@ -104,7 +104,7 @@
                 <div class="nav-group">Operación</div>
                 <a href="/Mesas/ListaMesas.aspx" class="nav-link" id="lnkMesas" runat="server">Mesas</a>
                 <a href="/Asignaciones/Asignaciones.aspx" class="nav-link" id="lnkAsignaciones" runat="server">Asignación de mesas</a>
-                <a href="/Pedidos/PedidoEnCurso.aspx" class="nav-link">Pedidos</a>
+                <a href="/Pedidos/Pedidos.aspx" class="nav-link">Pedidos</a>
                 <div class="nav-group" id="navAdministracion" runat="server">Administración</div>
                 <a href="/Usuarios/ListaUsuario.aspx" class="nav-link" id="lnkUsuarios" runat="server">Usuarios</a>
                 <a href="/Insumos/ListaInsumos.aspx" class="nav-link" id="lnkInsumos" runat="server">Insumos</a>
