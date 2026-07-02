@@ -72,7 +72,8 @@
                         <asp:Button
                             runat="server"
                             Text='<%# TextoInsumo(Container.DataItem) %>'
-                            CssClass="btn btn-outline-dark btn-sm me-1 mb-1"
+                            CssClass="btn btn-outline-dark btn-sm d-block w-100 text-start mb-1"
+                            Style="white-space: normal;"
                             CommandArgument='<%# Eval("Id") %>'
                             CausesValidation="false"
                             OnClick="btnSeleccionarInsumo_Click" />
