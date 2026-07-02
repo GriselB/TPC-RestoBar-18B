@@ -282,5 +282,138 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Pedido> listarPedidos(
+    DateTime? desde,
+    DateTime? hasta,
+    int? idMesa,
+    int? idMesero,
+    bool? activo
+)
+        {
+            List<Pedido> lista = new List<Pedido>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = @"
+            SELECT 
+                P.Id,
+                P.IdMesa,
+                M.Numero AS NumeroMesa,
+
+                P.IdUsuario,
+                U.Nombre AS NombreMesero,
+                U.Apellido AS ApellidoMesero,
+
+                P.FechaApertura,
+                P.FechaCierre,
+                P.Activo
+            FROM PEDIDOS P
+            INNER JOIN MESAS M ON M.Id = P.IdMesa
+            INNER JOIN USUARIOS U ON U.Id = P.IdUsuario
+            WHERE 1 = 1
+        ";
+
+                if (desde.HasValue && hasta.HasValue)
+                {
+                    consulta += @"
+                AND 
+                (
+                    P.FechaApertura BETWEEN @desde AND @hasta
+                    OR
+                    P.FechaCierre BETWEEN @desde AND @hasta
+                )
+            ";
+                }
+                else if (desde.HasValue)
+                {
+                    consulta += @"
+                AND 
+                (
+                    P.FechaApertura >= @desde
+                    OR
+                    P.FechaCierre >= @desde
+                )
+            ";
+                }
+                else if (hasta.HasValue)
+                {
+                    consulta += @"
+                AND 
+                (
+                    P.FechaApertura <= @hasta
+                    OR
+                    P.FechaCierre <= @hasta
+                )
+            ";
+                }
+
+                if (idMesa.HasValue)
+                    consulta += " AND P.IdMesa = @idMesa ";
+
+                if (idMesero.HasValue)
+                    consulta += " AND P.IdUsuario = @idMesero ";
+
+                if (activo.HasValue)
+                    consulta += " AND P.Activo = @activo ";
+
+                consulta += " ORDER BY P.FechaApertura DESC ";
+
+                datos.setearConsulta(consulta);
+
+                if (desde.HasValue)
+                    datos.setearParametro("@desde", desde.Value);
+
+                if (hasta.HasValue)
+                    datos.setearParametro("@hasta", hasta.Value);
+
+                if (idMesa.HasValue)
+                    datos.setearParametro("@idMesa", idMesa.Value);
+
+                if (idMesero.HasValue)
+                    datos.setearParametro("@idMesero", idMesero.Value);
+
+                if (activo.HasValue)
+                    datos.setearParametro("@activo", activo.Value);
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Pedido aux = new Pedido();
+
+                    aux.Id = (int)datos.Lector["Id"];
+
+                    aux.Mesa = new Mesa();
+                    aux.Mesa.Id = (int)datos.Lector["IdMesa"];
+                    aux.Mesa.Numero = (int)datos.Lector["NumeroMesa"];
+
+                    aux.Usuario = new Usuario();
+                    aux.Usuario.Id = (int)datos.Lector["IdUsuario"];
+                    aux.Usuario.Nombre = datos.Lector["NombreMesero"].ToString();
+                    aux.Usuario.Apellido = datos.Lector["ApellidoMesero"].ToString();
+
+                    aux.FechaApertura = (DateTime)datos.Lector["FechaApertura"];
+
+                    if (datos.Lector["FechaCierre"] != DBNull.Value)
+                        aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
+
+                    aux.Activo = (bool)datos.Lector["Activo"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

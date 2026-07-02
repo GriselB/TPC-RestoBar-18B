@@ -4,7 +4,85 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>Pedidos</h4>
     </div>
+    <div class="card mb-3">
+    <div class="card-body">
 
+        <div class="row g-2 align-items-end">
+
+            <div class="col-md-3">
+                <label class="form-label">Desde</label>
+                <asp:TextBox 
+                    ID="txtDesde" 
+                    runat="server" 
+                    CssClass="form-control" 
+                    TextMode="DateTimeLocal">
+                </asp:TextBox>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Hasta</label>
+                <asp:TextBox 
+                    ID="txtHasta" 
+                    runat="server" 
+                    CssClass="form-control" 
+                    TextMode="DateTimeLocal">
+                </asp:TextBox>
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Mesa</label>
+                <asp:DropDownList 
+                    ID="ddlMesa" 
+                    runat="server" 
+                    CssClass="form-select">
+                </asp:DropDownList>
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Mesero</label>
+                <asp:DropDownList 
+                    ID="ddlMesero" 
+                    runat="server" 
+                    CssClass="form-select">
+                </asp:DropDownList>
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Estado</label>
+                <asp:DropDownList 
+                    ID="ddlEstado" 
+                    runat="server" 
+                    CssClass="form-select">
+
+                    <asp:ListItem Text="Todos" Value=""></asp:ListItem>
+                    <asp:ListItem Text="Abiertos" Value="1"></asp:ListItem>
+                    <asp:ListItem Text="Cerrados" Value="0"></asp:ListItem>
+
+                </asp:DropDownList>
+            </div>
+
+            <div class="col-md-2 mt-3">
+                <asp:Button 
+                    ID="btnBuscar" 
+                    runat="server" 
+                    Text="Buscar" 
+                    CssClass="btn btn-dark w-100"
+                    OnClick="btnBuscar_Click" />
+            </div>
+
+            <div class="col-md-2 mt-3">
+                <asp:Button 
+                    ID="btnLimpiar" 
+                    runat="server" 
+                    Text="Limpiar" 
+                    CssClass="btn btn-secondary w-100"
+                    OnClick="btnLimpiar_Click" />
+            </div>
+
+        </div>
+
+    </div>
+</div>
     <asp:GridView 
         ID="dgvPedidos" 
         runat="server" 

@@ -279,6 +279,12 @@ namespace RestoWeb.Pedidos
         {
             buscarInsumo();
         }
+        protected void btnIrAPedidos_Click(object sender, EventArgs e)
+        {
+            
+
+            Response.Redirect("/Pedidos/Pedidos.aspx", false);
+        }
 
     }
 

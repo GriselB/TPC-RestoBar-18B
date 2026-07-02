@@ -8,6 +8,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4>Pedido en curso</h4>
         <asp:Button ID="btnCerrarPedido" runat="server" Text="Cerrar pedido" CssClass="btn btn-danger" OnClick="btnCerrarPedido_Click" />
+        
     </div>
 
     <h3>
@@ -105,5 +106,10 @@
     <div class="d-flex justify-content-end align-items-center mt-3">
         <asp:Label ID="lblTotal" runat="server" CssClass="fw-bold" />
     </div>
+        <div class="col-auto">
+        <label class="form-label d-block">&nbsp;</label>
+        <asp:Button ID="btnIrAPedidos" runat="server" Text="Ir a Pedidos" CssClass="btn btn-dark" OnClick="btnIrAPedidos_Click" />
+    </div>
+
 
 </asp:Content>
