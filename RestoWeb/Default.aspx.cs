@@ -12,19 +12,22 @@ namespace RestoWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                cargarMesas();
-
-            if(Seguridad.esMesero(Session["usuario"]))
-                {
-                Usuario usuario = (Usuario)Session["usuario"];
-                cargarMesas(usuario.Id); }
-            else
             {
-                cargarMesas();
-            }
+                if (Seguridad.esMesero(Session["usuario"]))
+                {
+                    Usuario usuario = (Usuario)Session["usuario"];
+                    cargarMesas(usuario.Id);
+                    cargarAsignaciones();
+                }
+                else
+                {
+                    cargarMesas();
+                    cargarAsignaciones();
+                }
 
-            repMesas.DataSource = Session["listaMesas"];
-            repMesas.DataBind();
+                repMesas.DataSource = Session["listaMesas"];
+                repMesas.DataBind();
+            }
         }
 
         protected bool MesaTienePedido(object idMesa)
@@ -79,9 +82,48 @@ namespace RestoWeb
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
             hfMostrarModal.Value = "0";
-            cargarMesas();
+
+            if (Seguridad.esMesero(Session["usuario"]))
+            {
+                Usuario usuario = (Usuario)Session["usuario"];
+                cargarMesas(usuario.Id);
+            }
+            else
+            {
+                cargarMesas();
+            }
+
+            cargarAsignaciones();
+
             repMesas.DataSource = Session["listaMesas"];
             repMesas.DataBind();
+        }
+        protected void cargarAsignaciones()
+        {
+            AsignacionNegocio negocio = new AsignacionNegocio();
+            Session["listaAsignaciones"] = negocio.listarVigentes();
+        }
+        protected string ObtenerMeseroAsignado(object idMesaObj)
+        {
+            int idMesa = Convert.ToInt32(idMesaObj);
+
+            List<Asignacion> asignaciones = Session["listaAsignaciones"] as List<Asignacion>;
+
+            if (asignaciones == null)
+                return "Sin asignar";
+
+            foreach (Asignacion asignacion in asignaciones)
+            {
+                if (asignacion.Mesa != null && asignacion.Mesa.Id == idMesa)
+                {
+                    if (asignacion.Usuario != null)
+                        return asignacion.Usuario.Nombre + " " + asignacion.Usuario.Apellido;
+
+                    return "Sin asignar";
+                }
+            }
+
+            return "Sin asignar";
         }
     }
 }

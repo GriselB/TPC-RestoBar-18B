@@ -40,6 +40,9 @@
                 <h6 class="fw-bold">Mesa <%# Eval("Numero") %></h6>
                 <span style="font-size:12px;"><%# MesaTienePedido(Eval("Id")) ? "Ocupada" : "Libre" %></span>
                 <small><%# Eval("Descripcion") %></small>
+                <p class="card-text">
+    Mesero: <%# ObtenerMeseroAsignado(Eval("Id")) %>
+</p>
             </div>
                 </asp:LinkButton>
             </div>
