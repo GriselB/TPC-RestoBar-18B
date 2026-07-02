@@ -38,6 +38,7 @@ namespace Negocio
                     lista.Add(aux);
                 }
                 return lista;
+
             }
             catch (Exception ex)
             {
