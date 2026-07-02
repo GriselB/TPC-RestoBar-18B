@@ -12,42 +12,62 @@ namespace RestoWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                MesaNegocio negocio = new MesaNegocio();
-                List<Mesa> mesas = negocio.listar();
+                cargarMesas();
 
-                repMesas.DataSource = mesas;
-                repMesas.DataBind();
+            repMesas.DataSource = Session["listaMesas"];
+            repMesas.DataBind();
+        }
+
+        protected bool MesaTienePedido(object idMesa)
+        {
+            MesaNegocio negocio = new MesaNegocio();
+            return negocio.mesaTienePedidoActivo((int)idMesa);
+        }
+
+        protected void btnMesa_Click(object sender, EventArgs e)
+        {
+            int idMesa = int.Parse(((LinkButton)sender).CommandArgument);
+            MesaNegocio mesaNegocio = new MesaNegocio();
+            bool tienePedido = mesaNegocio.mesaTienePedidoActivo(idMesa);
+
+            if (tienePedido)
+            {
+                PedidoNegocio pedidoNegocio = new PedidoNegocio();
+                int idPedido = pedidoNegocio.buscarPedidoActivoPorMesa(idMesa);
+                Response.Redirect("Pedidos/PedidoEnCurso.aspx?IdPedido=" + idPedido);
+            }
+            else
+            {
+                Mesa mesa = mesaNegocio.listar(idMesa)[0];
+                hfIdMesa.Value = idMesa.ToString();
+                lblMesaSeleccionada.Text = "¿Desea abrir un nuevo pedido para Mesa N° " + mesa.Numero + "?";
+                hfMostrarModal.Value = "1";
             }
         }
 
-        protected void repMesas_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void btnConfirmarApertura_Click(object sender, EventArgs e)
         {
-            if (e.CommandName == "SeleccionarMesa")
-            {
-                int idMesa = int.Parse(e.CommandArgument.ToString());
-                MesaNegocio negocio = new MesaNegocio();
-                bool tienepedido = negocio.mesaTienePedidoActivo(idMesa);
-                int idPedido;
+            hfMostrarModal.Value = "0";
+            int idMesa = int.Parse(hfIdMesa.Value);
+            Usuario usuario = (Usuario)Session["usuario"];
+            PedidoNegocio negocio = new PedidoNegocio();
+            int idPedido = negocio.abrirPedido(idMesa, usuario.Id);
+            Response.Redirect("Pedidos/PedidoEnCurso.aspx?IdPedido=" + idPedido);
+        }
 
-                if (tienepedido)
-                {
-                    PedidoNegocio pedido = new PedidoNegocio();
-                    idPedido = pedido.buscarPedidoActivoPorMesa(idMesa);
+        private void cargarMesas()
+        {
+            MesaNegocio negocio = new MesaNegocio();
+            List<Mesa> mesas = negocio.listar().FindAll(x => x.Activo);
+            Session["listaMesas"] = mesas;
+        }
 
-                }
-                else
-                {
-                    PedidoNegocio pedido = new PedidoNegocio();
-                    Usuario usuario = (Usuario)Session["usuario"];
-
-                    pedido.abrirPedido(idMesa, usuario.Id);
-
-
-                idPedido = pedido.buscarPedidoActivoPorMesa(idMesa);
-                }
-                Response.Redirect("Pedidos/PedidoEnCurso.aspx?IdPedido=" + idPedido);
-            }
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+            hfMostrarModal.Value = "0";
+            cargarMesas();
+            repMesas.DataSource = Session["listaMesas"];
+            repMesas.DataBind();
         }
     }
 }

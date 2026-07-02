@@ -1,66 +1,70 @@
 ﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="RestoWeb._Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script>
+        window.onload = function () {
+            var mostrar = document.getElementById('<%= hfMostrarModal.ClientID %>').value;
+            if (mostrar === '1') {
+                var modal = new bootstrap.Modal(document.getElementById('modalConfirmarPedido'));
+                modal.show();
+            }
+        };
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h4 class="mb-4">Estado de mesas</h4>
 
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card text-center p-3">
-                <div class="text-muted" style="font-size:12px;">Total de mesas</div>
-                <div class="fs-4 fw-bold">6</div>
+    <asp:HiddenField ID="hfMostrarModal" runat="server" Value="0" />
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4>Estado de mesas</h4>
+        <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" CssClass="btn btn-secondary" OnClick="btnActualizar_Click" />
+    </div>
+
+    <asp:HiddenField ID="hfIdMesa" runat="server" />
+
+    <asp:Repeater ID="repMesas" runat="server">
+        <HeaderTemplate>
+            <div class="row">
+        </HeaderTemplate>
+        <ItemTemplate>
+            <div class="col-md-3 mb-3">
+                <asp:LinkButton
+                    ID="btnMesa"
+                    runat="server"
+                    CommandArgument='<%# Eval("Id") %>'
+                    CssClass="text-decoration-none"
+                    CausesValidation="false"
+                    OnClick="btnMesa_Click">
+            <div class='<%# MesaTienePedido(Eval("Id")) ? "card p-3 text-center bg-danger text-white" : "card p-3 text-center bg-success text-white" %>' style="cursor:pointer;">
+                <h6 class="fw-bold">Mesa <%# Eval("Numero") %></h6>
+                <span style="font-size:12px;"><%# MesaTienePedido(Eval("Id")) ? "Ocupada" : "Libre" %></span>
+                <small><%# Eval("Descripcion") %></small>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center p-3">
-                <div class="text-muted" style="font-size:12px;">Mesas libres</div>
-                <div class="fs-4 fw-bold text-success">3</div>
+                </asp:LinkButton>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center p-3">
-                <div class="text-muted" style="font-size:12px;">Mesas ocupadas</div>
-                <div class="fs-4 fw-bold text-danger">2</div>
+        </ItemTemplate>
+        <FooterTemplate>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center p-3">
-                <div class="text-muted" style="font-size:12px;">Pedidos abiertos</div>
-                <div class="fs-4 fw-bold text-warning">2</div>
+        </FooterTemplate>
+    </asp:Repeater>
+
+    <div class="modal fade" id="modalConfirmarPedido" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Abrir pedido</h5>
+                </div>
+                <div class="modal-body">
+                    <asp:Label ID="lblMesaSeleccionada" runat="server" />
+                    ¿Desea abrir un nuevo pedido para esta mesa?
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="btnConfirmarApertura" runat="server" Text="Sí, abrir pedido" CssClass="btn btn-dark" OnClick="btnConfirmarApertura_Click" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
-
-
-<asp:Repeater ID="repMesas" runat="server" OnItemCommand="repMesas_ItemCommand">
-    <HeaderTemplate>
-        <div class="row">
-    </HeaderTemplate>
-
-    <ItemTemplate>
-        <div class="col-md-3 mb-3">
-            <asp:LinkButton 
-                ID="btnMesa" 
-                runat="server"
-                CommandName="SeleccionarMesa"
-                CommandArgument='<%# Eval("Id") %>'
-                CssClass="text-decoration-none"
-                CausesValidation="false">
-
-                <div class="card p-3 text-center bg-success text-white" style="cursor:pointer;">
-                    <h6 class="fw-bold">Mesa <%# Eval("Numero") %></h6>
-                    <span style="font-size:12px;">Libre</span>
-                    <small><%# Eval("Descripcion") %></small>
-                </div>
-
-            </asp:LinkButton>
-        </div>
-    </ItemTemplate>
-    <FooterTemplate>
-        </div>
-    </FooterTemplate>
-</asp:Repeater>
 
 </asp:Content>
