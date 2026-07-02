@@ -16,7 +16,9 @@
             OnClick="btnCerrarPedido_Click" />
     </div>
 
-    <h3> <asp:Label ID="lblMesa" runat="server" Text="Mesa" /> </h3>
+    <h3>
+        <asp:Label ID="lblMesa" runat="server" Text="Mesa" />
+    </h3>
 
     <div class="mb-3">
         <asp:Label
@@ -74,6 +76,18 @@
                 <div class="mt-1">
                     <asp:Label ID="lblInsumoEncontrado" runat="server" CssClass="badge" Visible="false" />
                 </div>
+
+                <asp:Repeater ID="repInsumosEncontrados" runat="server" Visible="false">
+                    <ItemTemplate>
+                        <asp:Button
+                            runat="server"
+                            Text='<%# TextoInsumo(Container.DataItem) %>'
+                            CssClass="btn btn-outline-dark btn-sm me-1 mb-1"
+                            CommandArgument='<%# Eval("Id") %>'
+                            CausesValidation="false"
+                            OnClick="btnSeleccionarInsumo_Click" />
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
 
             <div class="col-auto ms-auto">

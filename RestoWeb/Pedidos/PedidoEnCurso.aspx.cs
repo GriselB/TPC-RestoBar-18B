@@ -86,6 +86,11 @@ namespace RestoWeb.Pedidos
 
             hfIdInsumoSeleccionado.Value = "";
             Session["insumoEncontrado"] = null;
+            Session["insumosEncontrados"] = null;
+
+            repInsumosEncontrados.DataSource = null;
+            repInsumosEncontrados.DataBind();
+            repInsumosEncontrados.Visible = false;
 
             if (string.IsNullOrEmpty(texto))
             {
@@ -96,27 +101,38 @@ namespace RestoWeb.Pedidos
             InsumoNegocio negocio = new InsumoNegocio();
             List<Insumo> lista = negocio.listar(texto, 0, false, false);
 
-            lblInsumoEncontrado.Visible = true;
-
             if (lista.Count == 0)
             {
+                lblInsumoEncontrado.Visible = true;
                 lblInsumoEncontrado.CssClass = "badge bg-danger-subtle text-danger-emphasis";
                 lblInsumoEncontrado.Text = "Sin resultados";
             }
-            else if (lista.Count > 1)
-            {
-                lblInsumoEncontrado.CssClass = "badge bg-danger-subtle text-danger-emphasis";
-                lblInsumoEncontrado.Text = lista.Count + " coincidencias, sé más específico";
-            }
-            else
+            else if (lista.Count == 1)
             {
                 Insumo encontrado = lista[0];
 
                 hfIdInsumoSeleccionado.Value = encontrado.Id.ToString();
                 Session["insumoEncontrado"] = encontrado;
 
+                lblInsumoEncontrado.Visible = true;
                 lblInsumoEncontrado.CssClass = "badge bg-success-subtle text-success-emphasis";
                 lblInsumoEncontrado.Text = "✓ " + encontrado.Nombre + " · Stock: " + encontrado.Stock;
+            }
+            else if (lista.Count <= 10)
+            {
+                Session["insumosEncontrados"] = lista;
+
+                lblInsumoEncontrado.Visible = false;
+
+                repInsumosEncontrados.DataSource = lista;
+                repInsumosEncontrados.DataBind();
+                repInsumosEncontrados.Visible = true;
+            }
+            else
+            {
+                lblInsumoEncontrado.Visible = true;
+                lblInsumoEncontrado.CssClass = "badge bg-danger-subtle text-danger-emphasis";
+                lblInsumoEncontrado.Text = lista.Count + " coincidencias, sé más específico";
             }
         }
 
@@ -162,6 +178,7 @@ namespace RestoWeb.Pedidos
                 txtCantidad.Text = "1";
                 hfIdInsumoSeleccionado.Value = "";
                 lblInsumoEncontrado.Visible = false;
+                repInsumosEncontrados.Visible = false;
                 Session["insumoEncontrado"] = null;
                 lblErrorInsumo.Visible = false;
 
@@ -225,5 +242,31 @@ namespace RestoWeb.Pedidos
 
             Response.Redirect("~/Default.aspx", false);
         }
+
+        protected string TextoInsumo(object item)
+        {
+            Insumo insumo = (Insumo)item;
+            return insumo.Nombre + " — " + insumo.Precio.ToString("C") + " (Stock: " + insumo.Stock + ")";
+        }
+
+        protected void btnSeleccionarInsumo_Click(object sender, EventArgs e)
+        {
+            int idInsumo = int.Parse(((Button)sender).CommandArgument);
+
+            List<Insumo> lista = (List<Insumo>)Session["insumosEncontrados"];
+            Insumo seleccionado = lista.FindAll(x => x.Id == idInsumo)[0];
+
+            hfIdInsumoSeleccionado.Value = seleccionado.Id.ToString();
+            Session["insumoEncontrado"] = seleccionado;
+
+            txtBuscarInsumo.Text = seleccionado.Nombre;
+
+            repInsumosEncontrados.Visible = false;
+
+            lblInsumoEncontrado.Visible = true;
+            lblInsumoEncontrado.CssClass = "badge bg-success-subtle text-success-emphasis";
+            lblInsumoEncontrado.Text = "✓ " + seleccionado.Nombre + " · Stock: " + seleccionado.Stock;
+        }
+
     }
 }

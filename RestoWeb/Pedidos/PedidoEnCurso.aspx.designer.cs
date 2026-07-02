@@ -96,6 +96,15 @@ namespace RestoWeb.Pedidos
         protected global::System.Web.UI.WebControls.Label lblInsumoEncontrado;
 
         /// <summary>
+        /// Control repInsumosEncontrados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repInsumosEncontrados;
+
+        /// <summary>
         /// Control btnRestarCantidad.
         /// </summary>
         /// <remarks>
