@@ -24,6 +24,15 @@ namespace RestoWeb.Pedidos
         protected global::System.Web.UI.WebControls.Button btnCerrarPedido;
 
         /// <summary>
+        /// lblMesa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMesa;
+
+        /// <summary>
         /// lblDatosPedido control.
         /// </summary>
         /// <remarks>

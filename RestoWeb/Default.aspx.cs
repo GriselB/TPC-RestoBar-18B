@@ -46,7 +46,7 @@ namespace RestoWeb
 
                 idPedido = pedido.buscarPedidoActivoPorMesa(idMesa);
                 }
-                Response.Redirect("Pedidos/PedidoEnCurso.aspx?idMesa=" + idMesa);
+                Response.Redirect("Pedidos/PedidoEnCurso.aspx?IdPedido=" + idPedido);
             }
         }
     }
