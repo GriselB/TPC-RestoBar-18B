@@ -25,7 +25,7 @@
                 <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" />
             </div>
             <div class="mb-3">
-                <label class="form-label">Stock Minimo</label>
+                <label class="form-label">Stock Critico</label>
                 <asp:TextBox ID="TextStockMinimo" runat="server" CssClass="form-control" />
             </div>
             <div class="mb-3">

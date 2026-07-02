@@ -42,8 +42,9 @@ namespace RestoWeb.Insumos
                 idCategoria = int.Parse(ddlFiltroCategoria.SelectedValue);
 
             bool soloStockCero = chkStockCero.Checked;
+            bool StockCritico = chkStockCritico.Checked;
 
-            dgvInsumos.DataSource = negocio.listar(nombre, idCategoria, soloStockCero);
+            dgvInsumos.DataSource = negocio.listar(nombre, idCategoria, soloStockCero, StockCritico);
             dgvInsumos.DataBind();
         }
         private void cargarCategorias()

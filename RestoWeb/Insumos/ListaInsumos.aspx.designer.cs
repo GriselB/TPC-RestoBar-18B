@@ -42,6 +42,15 @@ namespace RestoWeb.Insumos
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkStockCero;
 
         /// <summary>
+        /// chkStockCritico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkStockCritico;
+
+        /// <summary>
         /// btnFiltrar control.
         /// </summary>
         /// <remarks>

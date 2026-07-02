@@ -9,7 +9,7 @@ namespace Negocio
 {
     public class InsumoNegocio
     {
-        public List<Insumo> listar(string nombre, int idCategoria, bool soloStockCero)
+        public List<Insumo> listar(string nombre, int idCategoria, bool soloStockCero, bool StockCritico)
         {
             List<Insumo> lista = new List<Insumo>();
             AccesoDatos datos = new AccesoDatos();
@@ -27,6 +27,9 @@ namespace Negocio
 
                 if (soloStockCero)
                     consulta += " AND I.Stock = 0";
+
+                if(StockCritico)
+                    consulta += " AND I.Stock <= I.StockMinimo";
 
                 datos.setearConsulta(consulta);
 
