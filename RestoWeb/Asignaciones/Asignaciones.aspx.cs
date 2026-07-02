@@ -78,12 +78,15 @@ namespace RestoWeb.Mesas
                 lblError.Visible = false;
 
                 cargarGrilla();
+                
             }
             catch (Exception ex)
             {
-                lblError.Text = ex.Message;
-                lblError.Visible = true;
-                lblExito.Visible = false;
+               lblError.Text = ex.Message;
+               lblError.Visible = true;
+               lblExito.Visible = false;
+               
+
             }
         }
 
