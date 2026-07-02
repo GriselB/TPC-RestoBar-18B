@@ -53,35 +53,22 @@ namespace RestoWeb.Pedidos
 
             List<DetallePedido> lista = negocio.listarPorPedido(IdPedido);
 
-            List<object> listaGrilla = new List<object>();
+            dgvPedidoEnCurso.DataSource = lista;
+            dgvPedidoEnCurso.DataBind();
 
             decimal total = 0;
 
             foreach (DetallePedido item in lista)
             {
-                decimal subtotal = item.Cantidad * item.PrecioUnitario;
-
-                listaGrilla.Add(new
-                {
-                    Id = item.Id,
-                    Insumo = item.Insumo.Nombre,
-                    Cantidad = item.Cantidad,
-                    PrecioUnitario = item.PrecioUnitario,
-                    Subtotal = subtotal
-                });
-
-                total += subtotal;
+                total += item.Subtotal;
             }
-
-            dgvPedidoEnCurso.DataSource = listaGrilla;
-            dgvPedidoEnCurso.DataBind();
 
             lblTotal.Text = "Total: " + total.ToString("C");
         }
 
         private void cargarDatosPedido()
         {
-            
+
 
             lblMesa.Text = "Pedido N° " + IdPedido;
             lblDatosPedido.Text = "Detalle del pedido en curso";
@@ -107,9 +94,26 @@ namespace RestoWeb.Pedidos
 
         protected void btnCerrarPedido_Click(object sender, EventArgs e)
         {
-           
-
             Response.Redirect("~/Default.aspx", false);
+        }
+
+        protected void btnSumarCantidad_Click(object sender, EventArgs e)
+        {
+            int valor;
+            if (!int.TryParse(txtCantidad.Text, out valor))
+                valor = 0;
+
+            txtCantidad.Text = (valor + 1).ToString();
+        }
+
+        protected void btnRestarCantidad_Click(object sender, EventArgs e)
+        {
+            int valor;
+            if (!int.TryParse(txtCantidad.Text, out valor))
+                valor = 0;
+
+            if (valor > 1)
+                txtCantidad.Text = (valor - 1).ToString();
         }
 
     }
