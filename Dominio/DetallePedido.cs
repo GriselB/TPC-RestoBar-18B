@@ -21,5 +21,10 @@ namespace Dominio
 
         public bool Activo { get; set; }
 
+        public decimal Subtotal
+        {
+            get { return Cantidad * PrecioUnitario; }
+        }
+
     }
 }

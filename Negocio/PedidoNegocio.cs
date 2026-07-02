@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,54 @@ namespace Negocio
 {
     public class PedidoNegocio
     {
+        public Pedido buscarPorId(int idPedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"
+            SELECT Id, IdMesa, IdUsuario, FechaApertura, FechaCierre, Activo
+            FROM PEDIDOS
+            WHERE Id = @idPedido
+        ");
+
+                datos.setearParametro("@idPedido", idPedido);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Pedido aux = new Pedido();
+
+                    aux.Id = (int)datos.Lector["Id"];
+
+                    aux.Mesa = new Mesa();
+                    aux.Mesa.Id = (int)datos.Lector["IdMesa"];
+
+                    aux.Usuario = new Usuario();
+                    aux.Usuario.Id = (int)datos.Lector["IdUsuario"];
+
+                    aux.FechaApertura = (DateTime)datos.Lector["FechaApertura"];
+
+                    if (!(datos.Lector["FechaCierre"] is DBNull))
+                        aux.FechaCierre = (DateTime)datos.Lector["FechaCierre"];
+
+                    aux.Activo = (bool)datos.Lector["Activo"];
+
+                    return aux;
+                }
+
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public int abrirPedido(int idMesa, int idUsuario)
         {
             AccesoDatos datos = new AccesoDatos();
