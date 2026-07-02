@@ -66,27 +66,42 @@
 
     <h5>Agregar insumo</h5>
 
-    <div class="row g-2 align-items-end mb-3">
+    <asp:Label ID="lblErrorInsumo" runat="server" CssClass="alert alert-danger" Visible="false" />
 
-        <div class="col-md-3">
+    <div class="row g-2 align-items-start mb-3">
+
+        <div class="col-md-5">
+            <label class="form-label">Insumo</label>
+            <asp:TextBox ID="txtBuscarInsumo" runat="server" CssClass="form-control" placeholder="Escribí el nombre del insumo..." AutoPostBack="true" OnTextChanged="txtBuscarInsumo_TextChanged" />
+            <asp:HiddenField ID="hfIdInsumoSeleccionado" runat="server" />
+            <div class="mt-1">
+                <asp:Label ID="lblInsumoEncontrado" runat="server" CssClass="badge" Visible="false" />
+            </div>
+        </div>
+
+        <div class="col-auto ms-auto">
             <label class="form-label">Cantidad</label>
-            <div class="input-group">
+            <div class="input-group" style="max-width: 140px;">
                 <asp:Button ID="btnRestarCantidad" runat="server" Text="-" CssClass="btn btn-outline-secondary" CausesValidation="false" OnClick="btnRestarCantidad_Click" />
                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control text-center" Text="1" />
                 <asp:Button ID="btnSumarCantidad" runat="server" Text="+" CssClass="btn btn-outline-secondary" CausesValidation="false" OnClick="btnSumarCantidad_Click" />
             </div>
         </div>
 
+        <div class="col-auto">
+            <label class="form-label d-block">&nbsp;</label>
+            <asp:Button
+                ID="btnAgregarInsumo"
+                runat="server"
+                Text="+ Agregar insumo"
+                CssClass="btn btn-dark"
+                CausesValidation="false"
+                OnClick="btnAgregarInsumo_Click" />
+        </div>
+
     </div>
 
-    <div class="d-flex justify-content-between align-items-center mt-3">
-        <asp:Button
-            ID="btnAgregarInsumo"
-            runat="server"
-            Text="+ Agregar insumo"
-            CssClass="btn btn-dark"
-            OnClick="btnAgregarInsumo_Click" />
-
+    <div class="d-flex justify-content-end align-items-center mt-3">
         <asp:Label
             ID="lblTotal"
             runat="server"

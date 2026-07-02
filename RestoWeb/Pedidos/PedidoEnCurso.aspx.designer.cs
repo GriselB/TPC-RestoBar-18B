@@ -51,6 +51,42 @@ namespace RestoWeb.Pedidos
         protected global::System.Web.UI.WebControls.GridView dgvPedidoEnCurso;
 
         /// <summary>
+        /// Control lblErrorInsumo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorInsumo;
+
+        /// <summary>
+        /// Control txtBuscarInsumo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarInsumo;
+
+        /// <summary>
+        /// Control hfIdInsumoSeleccionado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdInsumoSeleccionado;
+
+        /// <summary>
+        /// Control lblInsumoEncontrado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInsumoEncontrado;
+
+        /// <summary>
         /// Control btnRestarCantidad.
         /// </summary>
         /// <remarks>

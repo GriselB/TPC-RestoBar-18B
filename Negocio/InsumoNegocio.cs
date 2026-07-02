@@ -189,6 +189,53 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void descontarStock(int idInsumo, int cantidad)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"UPDATE INSUMOS SET Stock = Stock - @Cantidad WHERE Id = @Id");
+
+                datos.setearParametro("@Cantidad", cantidad);
+                datos.setearParametro("@Id", idInsumo);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void devolverStock(int idInsumo, int cantidad)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"UPDATE INSUMOS SET Stock = Stock + @Cantidad WHERE Id = @Id");
+
+                datos.setearParametro("@Cantidad", cantidad);
+                datos.setearParametro("@Id", idInsumo);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public bool existeInsumoConNombreParaEdicion(string nombre, int id)
         {
             AccesoDatos datos = new AccesoDatos();
