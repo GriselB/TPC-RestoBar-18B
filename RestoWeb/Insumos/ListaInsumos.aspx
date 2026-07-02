@@ -51,8 +51,9 @@
             <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
             <asp:BoundField HeaderText="Precio" DataField="Precio" />
             <asp:BoundField HeaderText="Stock" DataField="Stock" />
+            
+            <asp:BoundField HeaderText="Stock Minimo" DataField="StockMinimo" />
             <asp:BoundField HeaderText="Categoria" DataField="Categoria" />
-
             <asp:TemplateField HeaderText="Acciones">
                 <ItemTemplate>
                     <a href='FormularioInsumos.aspx?id=<%# Eval("Id") %>' class="btn btn-sm btn-secondary">Editar</a>

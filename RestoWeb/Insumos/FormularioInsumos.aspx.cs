@@ -63,7 +63,7 @@ namespace RestoWeb.Insumos
                 txtDescripcion.Text = insumo.Descripcion;
                 txtPrecio.Text = insumo.Precio.ToString();
                 txtStock.Text = insumo.Stock.ToString();
-
+                TextStockMinimo.Text = insumo.StockMinimo.ToString();
                 ddlCategoria.SelectedValue = insumo.Categoria.Id.ToString();
 
                 
@@ -83,7 +83,10 @@ namespace RestoWeb.Insumos
                     throw new Exception("Debe ingresar un precio válido.");
 
                 if (!int.TryParse(txtStock.Text, out int stock))
-                    throw new Exception("Debe ingresar un stock válido.");
+                    throw new Exception("El stock debe ser un numero entero.");
+
+                if (!int.TryParse(TextStockMinimo.Text, out int StockMinimo))
+                    throw new Exception("El stock minimo debe ser un numero entero.");
 
                 if (ddlCategoria.SelectedValue == "")
                     throw new Exception("Debe seleccionar una categoría.");
@@ -91,7 +94,7 @@ namespace RestoWeb.Insumos
                     throw new Exception("El precio debe ser mayor a cero.");
 
                 if (stock < 0)
-                    throw new Exception("El stock no puede ser negativo.");
+                    throw new Exception("El stock debe ser un numero entero.");
 
                 if (!int.TryParse(ddlCategoria.SelectedValue, out int idCategoria))
                     throw new Exception("Debe seleccionar una categoría válida.");
@@ -109,7 +112,7 @@ namespace RestoWeb.Insumos
                 nuevo.Descripcion = txtDescripcion.Text.Trim();
                 nuevo.Precio = precio;
                 nuevo.Stock = stock;
-
+                nuevo.StockMinimo = StockMinimo;
                 nuevo.Categoria = new Categoria();
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 

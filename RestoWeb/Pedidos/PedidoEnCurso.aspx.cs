@@ -53,19 +53,28 @@ namespace RestoWeb.Pedidos
 
             List<DetallePedido> lista = negocio.listarPorPedido(IdPedido);
 
-            var listaGrilla = lista.Select(x => new
+            List<object> listaGrilla = new List<object>();
+
+            decimal total = 0;
+
+            foreach (DetallePedido item in lista)
             {
-                Id = x.Id,
-                Insumo = x.Insumo.Nombre,
-                Cantidad = x.Cantidad,
-                PrecioUnitario = x.PrecioUnitario,
-                Subtotal = x.Cantidad * x.PrecioUnitario
-            }).ToList();
+                decimal subtotal = item.Cantidad * item.PrecioUnitario;
+
+                listaGrilla.Add(new
+                {
+                    Id = item.Id,
+                    Insumo = item.Insumo.Nombre,
+                    Cantidad = item.Cantidad,
+                    PrecioUnitario = item.PrecioUnitario,
+                    Subtotal = subtotal
+                });
+
+                total += subtotal;
+            }
 
             dgvPedidoEnCurso.DataSource = listaGrilla;
             dgvPedidoEnCurso.DataBind();
-
-            decimal total = listaGrilla.Sum(x => x.Subtotal);
 
             lblTotal.Text = "Total: " + total.ToString("C");
         }

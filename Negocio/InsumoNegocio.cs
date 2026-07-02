@@ -17,7 +17,7 @@ namespace Negocio
             try
             {
 
-                string consulta = @"SELECT I.Id, I.Nombre, I.Descripcion, I.Precio,I.Stock, I.IdCategoria, C.Descripcion AS CategoriaDescripcion FROM INSUMOS I INNER JOIN CATEGORIAS C ON C.Id = I.IdCategoria WHERE I.Activo = 1";
+                string consulta = @"SELECT I.Id, I.Nombre, I.Descripcion, I.Precio,I.Stock, I.IdCategoria, I.StockMinimo, C.Descripcion AS CategoriaDescripcion FROM INSUMOS I INNER JOIN CATEGORIAS C ON C.Id = I.IdCategoria WHERE I.Activo = 1";
 
                 if (!string.IsNullOrWhiteSpace(nombre))
                     consulta += " AND I.Nombre LIKE @nombre";
@@ -47,6 +47,7 @@ namespace Negocio
 
                     aux.Precio = (decimal)datos.Lector["Precio"];
                     aux.Stock = (int)datos.Lector["Stock"];
+                    aux.StockMinimo = (int)datos.Lector["StockMinimo"];
 
                     aux.Categoria = new Categoria();
                     aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
@@ -81,7 +82,7 @@ namespace Negocio
                     throw new Exception("Ya existe un insumo con ese nombre.");
 
 
-                datos.setearConsulta(@"INSERT INTO INSUMOS (Nombre, Descripcion,Precio,Stock,IdCategoria,Activo) VALUES (@Nombre, @Descripcion, @Precio, @Stock, @IdCategoria,@Activo)");
+                datos.setearConsulta(@"INSERT INTO INSUMOS (Nombre, Descripcion,Precio,Stock,IdCategoria,Activo,StockMinimo) VALUES (@Nombre, @Descripcion, @Precio, @Stock, @IdCategoria,@Activo,@StockMinimo)");
 
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Descripcion", nuevo.Descripcion);
@@ -89,6 +90,7 @@ namespace Negocio
                 datos.setearParametro("@Stock", nuevo.Stock);
                 datos.setearParametro("@IdCategoria", nuevo.Categoria.Id);
                 datos.setearParametro("@Activo", true);
+                datos.setearParametro("@StockMinimo", nuevo.StockMinimo);
 
                 datos.ejecutarAccion();
             }
@@ -112,7 +114,7 @@ namespace Negocio
                 if (existeInsumoConNombreParaEdicion(insumo.Nombre, insumo.Id))
                     throw new Exception("Ya existe otro insumo con ese nombre.");
 
-                datos.setearConsulta(@"UPDATE INSUMOS SET  Nombre = @Nombre, Descripcion = @Descripcion, Precio = @Precio, Stock = @Stock, IdCategoria = @IdCategoria WHERE Id = @Id");
+                datos.setearConsulta(@"UPDATE INSUMOS SET  Nombre = @Nombre, Descripcion = @Descripcion, Precio = @Precio, Stock = @Stock, StockMinimo = @StockMinimo, IdCategoria = @IdCategoria WHERE Id = @Id");
 
                 datos.setearParametro("@Id", insumo.Id);
                 datos.setearParametro("@Nombre", insumo.Nombre);
@@ -120,7 +122,7 @@ namespace Negocio
                 datos.setearParametro("@Precio", insumo.Precio);
                 datos.setearParametro("@Stock", insumo.Stock);
                 datos.setearParametro("@IdCategoria", insumo.Categoria.Id);
-                
+                datos.setearParametro("@StockMinimo", insumo.StockMinimo);
 
                 datos.ejecutarAccion();
             }

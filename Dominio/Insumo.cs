@@ -15,6 +15,7 @@ namespace Dominio
         public int Stock { get; set; }
         public Categoria Categoria { get; set; }
         public bool Activo { get; set; }
+        public int StockMinimo { get; set; }
 
         public override string ToString()
         {
