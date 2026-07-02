@@ -54,8 +54,9 @@
                         runat="server"
                         Text="Quitar"
                         CssClass="btn btn-sm btn-secondary"
-                        CommandName="Quitar"
-                        CommandArgument='<%# Eval("Id") %>' />
+                        CommandArgument='<%# Eval("Id") %>'
+                        CausesValidation="false"
+                        OnClick="btnQuitarInsumo_Click" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

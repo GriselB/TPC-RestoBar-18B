@@ -74,17 +74,14 @@ namespace RestoWeb.Pedidos
             lblDatosPedido.Text = "Detalle del pedido en curso";
         }
 
-        protected void dgvPedidoEnCurso_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void btnQuitarInsumo_Click(object sender, EventArgs e)
         {
-            if (e.CommandName == "Quitar")
-            {
-                int idDetalle = int.Parse(e.CommandArgument.ToString());
+            int idDetalle = int.Parse(((Button)sender).CommandArgument);
 
-                DetallePedidoNegocio negocio = new DetallePedidoNegocio();
-                negocio.eliminarInsumoDeDetalle(idDetalle);
+            DetallePedidoNegocio negocio = new DetallePedidoNegocio();
+            negocio.eliminarInsumoDeDetalle(idDetalle);
 
-                cargarDetallePedido();
-            }
+            cargarDetallePedido();
         }
 
         protected void btnAgregarInsumo_Click(object sender, EventArgs e)
