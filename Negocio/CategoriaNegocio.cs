@@ -120,7 +120,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta(@"SELECT COUNT(*) AS Cantidad FROM CATEGORIAS WHERE Descripcion = @Descripcion");
+                datos.setearConsulta(@"SELECT COUNT(*) AS Cantidad FROM CATEGORIAS WHERE Descripcion = @Descripcion and Activo = 1");
 
                 datos.setearParametro("@Descripcion", descripcion);
                 datos.ejecutarLectura();
@@ -153,6 +153,7 @@ namespace Negocio
             FROM CATEGORIAS
             WHERE UPPER(LTRIM(RTRIM(Descripcion))) = UPPER(LTRIM(RTRIM(@Descripcion)))
             AND Id <> @Id
+             and Activo = 1
         ");
 
                 datos.setearParametro("@Descripcion", descripcion);
