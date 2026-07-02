@@ -99,12 +99,13 @@ namespace Negocio
                     throw new Exception("Ya existe otro usuario con ese nombre de usuario.");
 
                 datos.setearConsulta(@"UPDATE USUARIOS SET NombreUsuario = @NombreUsuario, 
-                        Nombre = @Nombre, Apellido = @Apellido, IdRol = @IdRol WHERE Id = @Id");
+                        Nombre = @Nombre, Apellido = @Apellido, IdRol = @IdRol, Activo = @Activo WHERE Id = @Id");
 
                 datos.setearParametro("@NombreUsuario", usuario.NombreUsuario);
                 datos.setearParametro("@Nombre", usuario.Nombre);
                 datos.setearParametro("@Apellido", usuario.Apellido);
                 datos.setearParametro("@IdRol", usuario.Rol.Id);
+                datos.setearParametro("@Activo", usuario.Activo);
                 datos.setearParametro("@Id", usuario.Id);
 
                 datos.ejecutarAccion();
@@ -217,6 +218,34 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool usuarioTieneAsignacionesOPedidosVigentes(int idUsuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"
+            SELECT
+                (SELECT COUNT(*) FROM ASIGNACIONES WHERE IdUsuario = @IdUsuario AND FechaCierre IS NULL) +
+                (SELECT COUNT(*) FROM PEDIDOS WHERE IdUsuario = @IdUsuario AND FechaCierre IS NULL)
+        ");
+
+                datos.setearParametro("@IdUsuario", idUsuario);
+
+                int cantidad = datos.ejecutarAccionScalar();
+
+                return cantidad > 0;
+            }
+            catch (Exception)
+            {
+                throw;
             }
             finally
             {
