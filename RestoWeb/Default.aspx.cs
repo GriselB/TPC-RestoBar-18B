@@ -52,19 +52,63 @@ namespace RestoWeb
             {
                 Mesa mesa = mesaNegocio.listar(idMesa)[0];
                 hfIdMesa.Value = idMesa.ToString();
-                lblMesaSeleccionada.Text = "¿Desea abrir un nuevo pedido para Mesa N° " + mesa.Numero + "?";
+
+                List<Asignacion> asignaciones = (List<Asignacion>)Session["listaAsignaciones"];
+                List<Asignacion> encontradas = asignaciones.FindAll(x => x.Mesa.Id == idMesa && x.Usuario != null);
+
+                if (encontradas.Count == 0)
+                {
+                    lblMesaSeleccionada.Text = "";
+                    lblErrorApertura.Text = "Esta mesa no tiene mesero asignado. No se puede abrir el pedido.";
+                    lblErrorApertura.Visible = true;
+                    btnConfirmarApertura.Visible = false;
+                    btnIrAAsignaciones.Visible = true;
+                }
+                else
+                {
+                    lblMesaSeleccionada.Text = "¿Desea abrir un nuevo pedido para Mesa N° " + mesa.Numero + "?";
+                    lblErrorApertura.Visible = false;
+                    btnConfirmarApertura.Visible = true;
+                    btnIrAAsignaciones.Visible = false;
+                }
+
                 hfMostrarModal.Value = "1";
             }
         }
 
+        protected void btnIrAAsignaciones_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Asignaciones/Asignaciones.aspx", false);
+        }
+
         protected void btnConfirmarApertura_Click(object sender, EventArgs e)
         {
-            hfMostrarModal.Value = "0";
-            int idMesa = int.Parse(hfIdMesa.Value);
-            Usuario usuario = (Usuario)Session["usuario"];
-            PedidoNegocio negocio = new PedidoNegocio();
-            int idPedido = negocio.abrirPedido(idMesa, usuario.Id);
-            Response.Redirect("Pedidos/PedidoEnCurso.aspx?IdPedido=" + idPedido);
+            try
+            {
+                int idMesa = int.Parse(hfIdMesa.Value);
+
+                List<Asignacion> asignaciones = (List<Asignacion>)Session["listaAsignaciones"];
+                List<Asignacion> encontradas = asignaciones.FindAll(x => x.Mesa.Id == idMesa && x.Usuario != null);
+
+                if (encontradas.Count == 0)
+                    throw new Exception("Esta mesa no tiene mesero asignado. No se puede abrir el pedido.");
+
+                int idMeseroAsignado = encontradas[0].Usuario.Id;
+
+                PedidoNegocio negocio = new PedidoNegocio();
+                int idPedido = negocio.abrirPedido(idMesa, idMeseroAsignado);
+
+                hfMostrarModal.Value = "0";
+                Response.Redirect("Pedidos/PedidoEnCurso.aspx?IdPedido=" + idPedido);
+            }
+            catch (Exception ex)
+            {
+                hfMostrarModal.Value = "1";
+                lblErrorApertura.Text = ex.Message;
+                lblErrorApertura.Visible = true;
+                btnConfirmarApertura.Visible = false;
+                btnIrAAsignaciones.Visible = true;
+            }
         }
 
         private void cargarMesas()

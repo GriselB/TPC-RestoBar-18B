@@ -121,6 +121,7 @@
     </form>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+        <%: Scripts.Render("~/Scripts/restobar.js") %>
     </asp:PlaceHolder>
 </body>
 </html>

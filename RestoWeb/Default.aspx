@@ -1,20 +1,11 @@
 ﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="RestoWeb._Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script>
-        window.onload = function () {
-            var mostrar = document.getElementById('<%= hfMostrarModal.ClientID %>').value;
-            if (mostrar === '1') {
-                var modal = new bootstrap.Modal(document.getElementById('modalConfirmarPedido'));
-                modal.show();
-            }
-        };
-    </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:HiddenField ID="hfMostrarModal" runat="server" Value="0" />
+    <input type="hidden" id="hfMostrarModal" runat="server" class="hf-mostrar-modal" value="0" />
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4>Estado de mesas</h4>
@@ -60,10 +51,11 @@
                 </div>
                 <div class="modal-body">
                     <asp:Label ID="lblMesaSeleccionada" runat="server" />
-                    ¿Desea abrir un nuevo pedido para esta mesa?
+                    <asp:Label ID="lblErrorApertura" runat="server" CssClass="alert alert-danger d-block mt-2" Visible="false" />
                 </div>
                 <div class="modal-footer">
-                    <asp:Button ID="btnConfirmarApertura" runat="server" Text="Sí, abrir pedido" CssClass="btn btn-dark" OnClick="btnConfirmarApertura_Click" />
+                    <asp:Button ID="btnConfirmarApertura" runat="server" Text="Sí, abrir pedido" CssClass="btn btn-dark" CausesValidation="false" OnClick="btnConfirmarApertura_Click" />
+                    <asp:Button ID="btnIrAAsignaciones" runat="server" Text="Ir a Asignaciones" CssClass="btn btn-dark" CausesValidation="false" Visible="false" OnClick="btnIrAAsignaciones_Click" />
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>
