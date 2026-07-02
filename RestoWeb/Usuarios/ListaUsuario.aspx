@@ -35,6 +35,8 @@
         </div>
     </div>
 
+    <asp:Label ID="lblError" runat="server" CssClass="alert alert-danger d-block" Visible="false" />
+
     <asp:GridView ID="dgvUsuarios" runat="server" CssClass="table" AutoGenerateColumns="false">
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />

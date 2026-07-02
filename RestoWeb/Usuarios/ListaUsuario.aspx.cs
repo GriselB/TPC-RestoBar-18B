@@ -9,43 +9,80 @@ namespace RestoWeb.Usuarios
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+
+            try
             {
-                UsuarioNegocio negocio = new UsuarioNegocio();
-                Session["listaUsuarios"] = negocio.listar();
-                filtrar();
+                if (!Seguridad.esGerente(Session["usuario"]))
+                {
+                    Response.Redirect("~/Default.aspx", false);
+                    return;
+                }
+
+                if (!IsPostBack)
+                {
+                    UsuarioNegocio negocio = new UsuarioNegocio();
+                    Session["listaUsuarios"] = negocio.listar();
+                    filtrar();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
         private void filtrar()
         {
-            List<Usuario> lista = (List<Usuario>)Session["listaUsuarios"];
 
-            string textoBusqueda = txtBusqueda.Text.ToUpper();
-            string campo = ddlCampoBusqueda.SelectedValue;
-
-            if (!string.IsNullOrWhiteSpace(textoBusqueda))
+            try
             {
-                if (campo == "Nombre")
-                    lista = lista.FindAll(x => x.Nombre.ToUpper().Contains(textoBusqueda));
-                else if (campo == "Apellido")
-                    lista = lista.FindAll(x => x.Apellido.ToUpper().Contains(textoBusqueda));
-                else if (campo == "NombreUsuario")
-                    lista = lista.FindAll(x => x.NombreUsuario.ToUpper().Contains(textoBusqueda));
+                if (Session["listaUsuarios"] == null)
+                {
+                    lblError.Text = "No se pudieron cargar los usuarios. Por favor hacé click en Actualizar.";
+                    lblError.Visible = true;
+                    dgvUsuarios.DataSource = null;
+                    dgvUsuarios.DataBind();
+                    return;
+                }
+
+                lblError.Visible = false;
+
+                List<Usuario> lista = (List<Usuario>)Session["listaUsuarios"];
+
+                string textoBusqueda = txtBusqueda.Text.ToUpper();
+                string campo = ddlCampoBusqueda.SelectedValue;
+
+                if (!string.IsNullOrWhiteSpace(textoBusqueda))
+                {
+                    if (campo == "Nombre")
+                        lista = lista.FindAll(x => x.Nombre.ToUpper().Contains(textoBusqueda));
+                    else if (campo == "Apellido")
+                        lista = lista.FindAll(x => x.Apellido.ToUpper().Contains(textoBusqueda));
+                    else if (campo == "NombreUsuario")
+                        lista = lista.FindAll(x => x.NombreUsuario.ToUpper().Contains(textoBusqueda));
+                }
+
+                string estado = ddlEstado.SelectedValue;
+                if (estado == "Activo")
+                    lista = lista.FindAll(x => x.Activo);
+                else if (estado == "Inactivo")
+                    lista = lista.FindAll(x => !x.Activo);
+
+                string idRol = ddlRol.SelectedValue;
+                if (idRol != "0")
+                    lista = lista.FindAll(x => x.Rol.Id == int.Parse(idRol));
+
+                dgvUsuarios.DataSource = lista;
+                dgvUsuarios.DataBind();
+
             }
+            catch (Exception)
+            {
 
-            string estado = ddlEstado.SelectedValue;
-            if (estado == "Activo")
-                lista = lista.FindAll(x => x.Activo);
-            else if (estado == "Inactivo")
-                lista = lista.FindAll(x => !x.Activo);
-
-            string idRol = ddlRol.SelectedValue;
-            if (idRol != "0")
-                lista = lista.FindAll(x => x.Rol.Id == int.Parse(idRol));
-
-            dgvUsuarios.DataSource = lista;
-            dgvUsuarios.DataBind();
+                throw;
+            }
         }
 
         protected void txtBusqueda_TextChanged(object sender, EventArgs e)
