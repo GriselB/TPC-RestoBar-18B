@@ -14,6 +14,13 @@ namespace RestoWeb.Insumos
         {
             try
             {
+
+                if (!Seguridad.esGerente(Session["usuario"]))
+                {
+                    Response.Redirect("~/Default.aspx", false);
+                    return;
+                }
+
                 if (!IsPostBack)
                 {
                     cargarInsumos();

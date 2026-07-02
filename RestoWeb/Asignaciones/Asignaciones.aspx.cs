@@ -10,8 +10,22 @@ namespace RestoWeb.Mesas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                cargarGrilla();
+            try
+            {
+                if (!Seguridad.esGerente(Session["usuario"]))
+                {
+                    Response.Redirect("~/Default.aspx", false);
+                    return;
+                }
+
+                if (!IsPostBack)
+                    cargarGrilla();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private void cargarGrilla()

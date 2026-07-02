@@ -14,6 +14,13 @@ namespace RestoWeb.Categorias
         {
             try
             {
+
+                if (!Seguridad.esGerente(Session["usuario"]))
+                {
+                    Response.Redirect("~/Default.aspx", false);
+                    return;
+                }
+
                 if (!IsPostBack)
                 {
                     cargarCategorias();

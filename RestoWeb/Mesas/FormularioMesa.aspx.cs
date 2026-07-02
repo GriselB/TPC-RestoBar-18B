@@ -15,6 +15,13 @@ namespace RestoWeb.Mesas
         {
             try
             {
+
+                if (!Seguridad.esGerente(Session["usuario"]))
+                {
+                    Response.Redirect("~/Default.aspx", false);
+                    return;
+                }
+
                 if (!IsPostBack)
                 {
                     string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";

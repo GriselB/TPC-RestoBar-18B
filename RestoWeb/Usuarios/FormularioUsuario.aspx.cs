@@ -11,6 +11,13 @@ namespace RestoWeb.Usuarios
         {
             try
             {
+
+                if (!Seguridad.esGerente(Session["usuario"]))
+                {
+                    Response.Redirect("~/Default.aspx", false);
+                    return;
+                }
+
                 if (!IsPostBack)
                 {
                     RolNegocio negocio = new RolNegocio();

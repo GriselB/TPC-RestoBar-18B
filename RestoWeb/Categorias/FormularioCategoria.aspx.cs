@@ -17,6 +17,12 @@ namespace RestoWeb.Categorias
             {
                 if (!IsPostBack)
                 {
+                    if (!Seguridad.esGerente(Session["usuario"]))
+                    {
+                        Response.Redirect("~/Default.aspx", false);
+                        return;
+                    }
+
                     if (Request.QueryString["id"] != null)
                     {
                         lblTitulo.Text = "Editar Categoria";

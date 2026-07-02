@@ -11,6 +11,11 @@ namespace RestoWeb.Mesas
         {
             try
             {
+                if (!Seguridad.esGerente(Session["usuario"]))
+                {
+                    Response.Redirect("~/Default.aspx", false);
+                    return;
+                }
 
                 if (!IsPostBack)
                 {
@@ -18,7 +23,8 @@ namespace RestoWeb.Mesas
                     Session["listaMesas"] = negocio.listar();
                     filtrar();
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Session["error"] = ex.Message;
                 Session["paginaAnteriorError"] = Request.RawUrl;
