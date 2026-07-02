@@ -139,5 +139,34 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool mesaTienePedidoActivo(int idMesa)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"
+                SELECT COUNT(*)
+                FROM PEDIDOS
+                WHERE IdMesa = @idMesa
+                  AND Activo = 1
+                  AND FechaCierre IS NULL
+            ");
+
+                datos.setearParametro("@idMesa", idMesa);
+
+                int cantidad = datos.ejecutarAccionScalar();
+
+                return cantidad > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

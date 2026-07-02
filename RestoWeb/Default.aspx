@@ -34,17 +34,28 @@
     </div>
 
 
-<asp:Repeater ID="repMesas" runat="server">
+<asp:Repeater ID="repMesas" runat="server" OnItemCommand="repMesas_ItemCommand">
     <HeaderTemplate>
         <div class="row">
     </HeaderTemplate>
+
     <ItemTemplate>
         <div class="col-md-3 mb-3">
-            <div class="card p-3 text-center bg-success text-white">
-                <h6 class="fw-bold">Mesa <%# Eval("Numero") %></h6>
-                <span style="font-size:12px;">Libre</span>
-                <small><%# Eval("Descripcion") %></small>
-            </div>
+            <asp:LinkButton 
+                ID="btnMesa" 
+                runat="server"
+                CommandName="SeleccionarMesa"
+                CommandArgument='<%# Eval("Id") %>'
+                CssClass="text-decoration-none"
+                CausesValidation="false">
+
+                <div class="card p-3 text-center bg-success text-white" style="cursor:pointer;">
+                    <h6 class="fw-bold">Mesa <%# Eval("Numero") %></h6>
+                    <span style="font-size:12px;">Libre</span>
+                    <small><%# Eval("Descripcion") %></small>
+                </div>
+
+            </asp:LinkButton>
         </div>
     </ItemTemplate>
     <FooterTemplate>
