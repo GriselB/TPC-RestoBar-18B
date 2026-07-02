@@ -29,17 +29,32 @@ namespace RestoWeb.Pedidos
                 return;
             }
 
-            cargarDatosPedido();
-            cargarDetallePedido();
+            PedidoNegocio pedidoNegocio = new PedidoNegocio();
+            Pedido pedido = pedidoNegocio.buscarPorId(idPedido);
+
+            if (pedido == null)
+            {
+                Response.Redirect("~/Default.aspx", false);
+                return;
+            }
+
+            int idPedidoActivoDeLaMesa = pedidoNegocio.buscarPedidoActivoPorMesa(pedido.Mesa.Id);
+            bool pedidoActivo = (idPedidoActivoDeLaMesa == idPedido);
+
+            cargarDatosPedido(pedidoActivo);
+            cargarDetallePedido(pedidoActivo);
+
+            btnCerrarPedido.Visible = pedidoActivo;
+            pnlAgregarInsumo.Visible = pedidoActivo;
         }
 
-        private void cargarDatosPedido()
+        private void cargarDatosPedido(bool pedidoActivo)
         {
             lblMesa.Text = "Pedido N° " + idPedido;
-            lblDatosPedido.Text = "Detalle del pedido en curso";
+            lblDatosPedido.Text = pedidoActivo ? "Detalle del pedido en curso" : "Este pedido ya está cerrado.";
         }
 
-        private void cargarDetallePedido()
+        private void cargarDetallePedido(bool pedidoActivo)
         {
             DetallePedidoNegocio negocio = new DetallePedidoNegocio();
 
@@ -47,6 +62,8 @@ namespace RestoWeb.Pedidos
 
             dgvPedidoEnCurso.DataSource = lista;
             dgvPedidoEnCurso.DataBind();
+
+            dgvPedidoEnCurso.Columns[4].Visible = pedidoActivo;
 
             decimal total = 0;
 
@@ -83,13 +100,13 @@ namespace RestoWeb.Pedidos
 
             if (lista.Count == 0)
             {
-                lblInsumoEncontrado.CssClass = "d-block mt-1 text-danger";
-                lblInsumoEncontrado.Text = "No se encontró ningún insumo con ese nombre.";
+                lblInsumoEncontrado.CssClass = "badge bg-danger-subtle text-danger-emphasis";
+                lblInsumoEncontrado.Text = "Sin resultados";
             }
             else if (lista.Count > 1)
             {
-                lblInsumoEncontrado.CssClass = "d-block mt-1 text-danger";
-                lblInsumoEncontrado.Text = "Hay " + lista.Count + " insumos que coinciden. Sé más específico.";
+                lblInsumoEncontrado.CssClass = "badge bg-danger-subtle text-danger-emphasis";
+                lblInsumoEncontrado.Text = lista.Count + " coincidencias, sé más específico";
             }
             else
             {
@@ -98,8 +115,8 @@ namespace RestoWeb.Pedidos
                 hfIdInsumoSeleccionado.Value = encontrado.Id.ToString();
                 Session["insumoEncontrado"] = encontrado;
 
-                lblInsumoEncontrado.CssClass = "d-block mt-1 text-success";
-                lblInsumoEncontrado.Text = "✓ " + encontrado.Nombre + " — " + encontrado.Precio.ToString("C") + " (Stock: " + encontrado.Stock + ")";
+                lblInsumoEncontrado.CssClass = "badge bg-success-subtle text-success-emphasis";
+                lblInsumoEncontrado.Text = "✓ " + encontrado.Nombre + " · Stock: " + encontrado.Stock;
             }
         }
 
@@ -107,6 +124,12 @@ namespace RestoWeb.Pedidos
         {
             try
             {
+                PedidoNegocio pedidoNegocio = new PedidoNegocio();
+                Pedido pedido = pedidoNegocio.buscarPorId(idPedido);
+
+                if (pedido == null || pedidoNegocio.buscarPedidoActivoPorMesa(pedido.Mesa.Id) != idPedido)
+                    throw new Exception("Este pedido ya está cerrado.");
+
                 if (string.IsNullOrEmpty(hfIdInsumoSeleccionado.Value))
                     throw new Exception("Buscá y confirmá un insumo válido antes de agregar.");
 
@@ -142,7 +165,7 @@ namespace RestoWeb.Pedidos
                 Session["insumoEncontrado"] = null;
                 lblErrorInsumo.Visible = false;
 
-                cargarDetallePedido();
+                cargarDetallePedido(true);
             }
             catch (Exception ex)
             {
@@ -153,6 +176,12 @@ namespace RestoWeb.Pedidos
 
         protected void btnQuitarInsumo_Click(object sender, EventArgs e)
         {
+            PedidoNegocio pedidoNegocio = new PedidoNegocio();
+            Pedido pedido = pedidoNegocio.buscarPorId(idPedido);
+
+            if (pedido == null || pedidoNegocio.buscarPedidoActivoPorMesa(pedido.Mesa.Id) != idPedido)
+                return;
+
             int idDetalle = int.Parse(((Button)sender).CommandArgument);
 
             DetallePedidoNegocio negocio = new DetallePedidoNegocio();
@@ -167,7 +196,7 @@ namespace RestoWeb.Pedidos
                 insumoNegocio.devolverStock(detalle.Insumo.Id, detalle.Cantidad);
             }
 
-            cargarDetallePedido();
+            cargarDetallePedido(true);
         }
 
         protected void btnSumarCantidad_Click(object sender, EventArgs e)
