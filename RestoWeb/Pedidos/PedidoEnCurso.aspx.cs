@@ -268,5 +268,11 @@ namespace RestoWeb.Pedidos
             lblInsumoEncontrado.Text = "✓ " + seleccionado.Nombre + " · Stock: " + seleccionado.Stock;
         }
 
+        protected void btnBuscarInsumo_Click(object sender, EventArgs e)
+        {
+            buscarInsumo();
+        }
+
     }
+
 }
