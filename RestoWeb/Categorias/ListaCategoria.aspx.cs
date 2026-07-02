@@ -23,8 +23,9 @@ namespace RestoWeb.Categorias
 
             catch (Exception ex)
             {
-                Session.Add("error", ex);
-                //Response.Redirect("Error.aspx"); Hay que crear la pagina de redirección cuando da error.
+                Session["error"] = ex.Message;
+                Session["paginaAnteriorError"] = Request.RawUrl;
+                Response.Redirect("~/Error.aspx", false);
             }
 
             

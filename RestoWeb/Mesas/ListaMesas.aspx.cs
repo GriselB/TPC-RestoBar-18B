@@ -9,11 +9,20 @@ namespace RestoWeb.Mesas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                MesaNegocio negocio = new MesaNegocio();
-                Session["listaMesas"] = negocio.listar();
-                filtrar();
+
+                if (!IsPostBack)
+                {
+                    MesaNegocio negocio = new MesaNegocio();
+                    Session["listaMesas"] = negocio.listar();
+                    filtrar();
+                }
+            }catch(Exception ex)
+            {
+                Session["error"] = ex.Message;
+                Session["paginaAnteriorError"] = Request.RawUrl;
+                Response.Redirect("~/Error.aspx", false);
             }
         }
 

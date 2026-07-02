@@ -45,7 +45,9 @@ namespace RestoWeb.Usuarios
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session["error"] = ex.Message;
+                Session["paginaAnteriorError"] = Request.RawUrl;
+                Response.Redirect("~/Error.aspx", false);
             }
         }
 

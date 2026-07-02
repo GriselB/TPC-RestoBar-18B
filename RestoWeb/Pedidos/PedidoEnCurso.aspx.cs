@@ -14,10 +14,17 @@ namespace RestoWeb.Pedidos
         {
             string queryId = Request.QueryString["idPedido"] != null ? Request.QueryString["idPedido"].ToString() : "";
             int.TryParse(queryId, out idPedido);
-
-            if (!IsPostBack)
+            try
             {
-                cargarPantalla();
+                if (!IsPostBack)
+                {
+                    cargarPantalla();
+                }
+            }catch (Exception ex)
+            {
+                Session["error"] = ex.Message;
+                Session["paginaAnteriorError"] = Request.RawUrl;
+                Response.Redirect("~/Error.aspx", false);
             }
         }
 
